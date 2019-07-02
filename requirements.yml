@@ -1,0 +1,3 @@
+dependencies:
+  - name: config
+    repository: file://charts/config
