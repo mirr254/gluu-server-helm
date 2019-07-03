@@ -1,0 +1,32 @@
+    
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "gluu.fullname" }}-config-volume-claim
+spec:
+  storageClassName: ""
+  volumeName: {{ template "gluu.fullname" }}-config
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10M
+  selector:
+    matchLabels:
+      config-init: {{ template "gluu.fullname" }}-config
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ template "gluu.fullname" }}-config
+  labels:
+      config-init: {{ template "gluu.fullname" }}-config
+spec:
+  capacity:
+    storage: 10M
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "HOME_DIR/config/db"
