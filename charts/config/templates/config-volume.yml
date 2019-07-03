@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ template "gluu.fullname" . }}-config
+  labels:
+      config-init: {{ template "gluu.fullname" . }}-config
+spec:
+  capacity:
+    storage: 10M
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "HOME_DIR/config/db"
