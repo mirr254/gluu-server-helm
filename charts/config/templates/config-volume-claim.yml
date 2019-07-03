@@ -1,11 +1,16 @@
+    
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: {{ template "gluu.fullname" . }}-config-volume-claim
 spec:
-  storageClassName: {{ template "gluu.fullname" . }}-storage-class
+  storageClassName: ""
+  volumeName: {{ template "gluu.fullname" . }}-config
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.volumeclaim.storage }}
+      storage: 10M
+  selector:
+    matchLabels:
+      config-init: {{ template "gluu.fullname" . }}-config
