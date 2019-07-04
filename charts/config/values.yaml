@@ -1,15 +1,10 @@
 #values for environment variables
 
-orgName: k8s
-# email address of the administrator usually. Used for certificate creation
-email: k8s@email.com
-# adminPass is administrator password for oxTrust and LDAP
+orgName: Gluu
 adminPass: password
-# domain name where the Gluu Server resides
+email: k8s@email.com
 domain: localhost
-# organisation location details
-countryCode: US
-state: UT
+country: US
+state: TE
 city: SLC
-# ldapType only OpenDJ is supported
 ldapType: opendj

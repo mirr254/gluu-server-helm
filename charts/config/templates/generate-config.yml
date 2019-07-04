@@ -20,7 +20,7 @@ spec:
             - mountPath: /opt/config-init/db/
               name: {{ template "gluu.fullname" . }}-config
           env:
-{{ include "gluu.commonEnvVars" . | ident 6 }}
+            {{ include "gluu.commonEnvVars" . | ident 12 }}
             - name: ADMIN_PW
               value: {{ .Values.adminPass }}
             - name: EMAIL
