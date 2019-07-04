@@ -23,7 +23,8 @@ global:
   gluuConfigK8sUseKubeConfig: false
   gluuSecretK8sNamespace: default
   gluuSecretK8sConfigmap: gluu
-  gluuSecretK8sUseKubeConfig:  false
+  gluuSecretK8sUseKubeConfig: false
+  gluuSecretAdapter: kubernetes
 
 
 
