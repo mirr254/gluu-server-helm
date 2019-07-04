@@ -8,5 +8,3 @@ country: US
 state: TE
 city: SLC
 ldapType: opendj
-configAdapterName: kubernetes
-confiSecretgAdapter: kubernetes

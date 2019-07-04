@@ -15,9 +15,10 @@ config:
   city: SLC
   # ldapType only OpenDJ is supported
   ldapType: opendj
-
+  
 global:
   configAdapterName: kubernetes
+  configSecretAdapter: kubernetes
   gluuConfigK8sNamespace: default
   gluuConfigK8sConfigmap: gluu
   gluuConfigK8sUseKubeConfig: false
