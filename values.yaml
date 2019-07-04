@@ -1,7 +1,7 @@
 # Declare variables to be passed into your templates.
 
 # values for config-init sub-chart
-config-init:
+config:
   orgName: k8s
   # email address of the administrator usually. Used for certificate creation
   email: k8s@email.com
