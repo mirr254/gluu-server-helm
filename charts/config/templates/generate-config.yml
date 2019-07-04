@@ -20,23 +20,21 @@ spec:
             - mountPath: /opt/config-init/db/
               name: {{ template "gluu.fullname" . }}-config
           env:
-            - name: GLUU_CONFIG_ADAPTER
-              value: kubernetes
-            - name: GLUU_SECRET_ADAPTER
-              value: kubernetes
             - name: ADMIN_PW
-              value: "secret"
+              value: {{ .Values.adminPass }}
             - name: EMAIL
-              value: "support@gluu.local"
+              value: {{ .Values.email }}
             - name: DOMAIN
-              value: "kube.gluu.local"
+              value: {{ .Values.domain }}
             - name: ORG_NAME
-              value: "Gluu, Inc"
+              value: {{ .Values.orgName }}
             - name: COUNTRY_CODE
-              value: "US"
+              value: {{ .Values.countryCode }}
             - name: STATE
-              value: "TX"
+              value: {{ .Values.state }}
             - name: CITY
-              value: "Austin"
+              value: {{ values.city }}
             - name: LDAP_TYPE
-              value: "opendj"
+              value: {{ .Values.ldapType }}
+          # we define args here. The default command defined in the container will use the new args
+          args: ["generate", "--admin-pw", "$(ADMIN_PW)", "--email", "$(EMAIL)", "--domain", "$(DOMAIN)", "--org-name", "$(ORG_NAME)", "--country-code", "$(COUNTRY_CODE)", "--state", "$(STATE)", "--city", "$(CITY)", "--ldap-type", "$(LDAP_TYPE)"]
