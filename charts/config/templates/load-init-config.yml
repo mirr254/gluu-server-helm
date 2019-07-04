@@ -23,5 +23,6 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ template "gluu.fullname" . }}-load-cm
+          args: [ "load" ]
 
 
