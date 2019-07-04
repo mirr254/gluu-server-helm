@@ -1,2 +1,23 @@
 # Declare variables to be passed into your templates.
+# values for config-init sub-chart
+config-init:
+  orgName: Gluu
+  adminPass: password
+  email: k8s@email.com
+  domain: localhost
+  country: US
+  state: TE
+  city: SLC
+
+global:
+  configAdapterName: kubernetes
+  gluuConfigK8sNamespace: default
+  gluuConfigK8sConfigmap: gluu
+  gluuConfigK8sUseKubeConfig: false
+  gluuSecretK8sNamespace: default
+  gluuSecretK8sConfigmap: gluu
+  gluuSecretK8sUseKubeConfig:  false
+
+
+
 
