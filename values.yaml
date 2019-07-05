@@ -17,6 +17,7 @@ config:
   ldapType: opendj
   
 global:
+  namespace: default
   configAdapterName: kubernetes
   configSecretAdapter: kubernetes
   gluuConfigK8sNamespace: default
