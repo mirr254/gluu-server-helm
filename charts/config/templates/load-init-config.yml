@@ -8,7 +8,7 @@ spec:
       labels: 
         app: {{ template "gluu.fullname" . }}-config-init-load
     spec: 
-      restartPolicy: never
+      restartPolicy: Never
       volumes:
         - name: {{ template "gluu.fullname" . }}-config
           persistentVolumeClaim:

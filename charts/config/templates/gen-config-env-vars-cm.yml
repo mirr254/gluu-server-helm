@@ -1,14 +1,15 @@
 apiVersion: v1
-kind: configMap
+kind: ConfigMap
 metadata: 
   name: {{ template "gluu.fullname" . }}-config-cm
+  namespace: {{ .Values.global.namespace }}
 data:
   ADMIN_PW:  {{ .Values.adminPass }}
-  EMAIL: value: {{ .Values.email }}
-  DOMAIN: value: {{ .Values.domain }}
-  ORG_NAME: value: {{ .Values.orgName }}
-  COUNTRY_CODE: value: {{ .Values.countryCode }}
-  STATE: value: {{ .Values.state }}
-  CITY: value: {{ .Values.city }}
-  LDAP_TYPE: value: {{ .Values.ldapType }}
+  EMAIL: {{ .Values.email }}
+  DOMAIN: {{ .Values.domain }}
+  ORG_NAME: {{ .Values.orgName }}
+  COUNTRY_CODE: {{ .Values.countryCode }}
+  STATE: {{ .Values.state }}
+  CITY: {{ .Values.city }}
+  LDAP_TYPE: {{ .Values.ldapType }}
   

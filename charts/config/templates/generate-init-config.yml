@@ -20,8 +20,8 @@ spec:
             - mountPath: /opt/config-init/db/
               name: {{ template "gluu.fullname" . }}-config
           envFrom:
-            - configMapRef: 
-              name: {{ template "gluu.fullname" . }}-config-cm
+          - configMapRef:        
+            name: {{ template "gluu.fullname" . }}-config-cm
           # we define args here. The default command defined in the container will use the new args
           args: ["generate", "--admin-pw", "$(ADMIN_PW)", "--email", "$(EMAIL)", "--domain", "$(DOMAIN)", "--org-name", "$(ORG_NAME)", "--country-code", "$(COUNTRY_CODE)", "--state", "$(STATE)", "--city", "$(CITY)", "--ldap-type", "$(LDAP_TYPE)"]
 
