@@ -2,9 +2,9 @@
 
 # values for config-init sub-chart
 config:
-  orgName: k8s
+  orgName: gluu
   # email address of the administrator usually. Used for certificate creation
-  email: k8s@email.com
+  email: support@gluu.com
   # adminPass is administrator password for oxTrust and LDAP
   adminPass: password
   # domain name where the Gluu Server resides
