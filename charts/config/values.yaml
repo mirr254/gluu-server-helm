@@ -8,3 +8,12 @@ country: US
 state: TE
 city: SLC
 ldapType: opendj
+
+# values for storage class
+storageclass:
+  encrypted: "true"
+  reclaimPolicy: Retain
+
+# VolumeClaim values
+volumeclaim:
+  storage: 1Gi
