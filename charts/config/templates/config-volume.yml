@@ -6,10 +6,12 @@ metadata:
     app: {{ template "gluu.fullname" . }}
   annotations:
     storageclass.beta.kubernetes.io/is-default-class: "false"
-provisioner: kubernetes.io/storageos
-allowVolumeExpansion: true
+provisioner: {{ .Values.storageclass.provisioner }}
 parameters:
-  encrypted: {{ .Values.storageclass.encrypted }}
+  pool: {{ .Values.storageclass.pool }}
+  description: {{ .Values.storageclass.description }}
+  fsType: {{ .Values.storageclass.fsType }}
+allowVolumeExpansion: true
 reclaimPolicy: {{ .Values.storageclass.reclaimPolicy }}
 mountOptions:
   - debug

@@ -11,8 +11,12 @@ ldapType: opendj
 
 # values for storage class
 storageclass:
-  encrypted: "true"
+  encrypted: true
   reclaimPolicy: Retain
+  pool: default
+  description: gluu-config-init-volume
+  fsType: ext4
+  provisioner: k8s.io/minikube-hostpath
 
 # VolumeClaim values
 volumeclaim:
