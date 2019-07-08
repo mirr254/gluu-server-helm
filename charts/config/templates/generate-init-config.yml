@@ -19,6 +19,7 @@ spec:
           volumeMounts:
             - mountPath: /opt/config-init/db/
               name: {{ template "gluu.fullname" . }}-config
+              subPath: db
           envFrom:
           - configMapRef:        
               name: {{ template "gluu.fullname" . }}-config-cm
