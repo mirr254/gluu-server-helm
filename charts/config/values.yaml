@@ -4,7 +4,7 @@ orgName: Gluu
 adminPass: password
 email: support@gluu.com
 domain: localhost
-country: US
+countryCode: US
 state: TE
 city: SLC
 ldapType: opendj
