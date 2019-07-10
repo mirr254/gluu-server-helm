@@ -1,0 +1,16 @@
+# Declare variables to be passed into your templates.
+
+# opendj ConfigMap values
+gluuConfigAdapter: kubernetes
+gluuSecretAdapter: kubernetes
+gluuLdapInit: true
+gluuLdapInitHost: opendj
+gluuLdapInitPort: 1636
+gluuOxtrustConfigGeneration: true
+gluuCacheType: NATIVE_PERSISTENCE
+gluuCertAltName: opendj
+# gluuRedisEnabled will determin if GLUU_REDIS_URL and GLUU_REDIS_TYPE if they will be used.
+gluuRedisEnabled: false
+gluuRedisCacheType: REDIS
+gluuRedisUrl: redis:6379
+gluuRedisType: STANDALONE

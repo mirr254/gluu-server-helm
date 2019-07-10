@@ -1,0 +1,9 @@
+apiVersion: v1
+appVersion: 3.1.6
+home: https://www.gluu.org/de
+maintainers:
+- name: gluu
+email: support@gluu.org
+description: A Helm chart for Gluu server
+name: gluu-opendj-chart
+version: 1.1.0
