@@ -9,19 +9,6 @@ state: TE
 city: SLC
 ldapType: opendj
 
-# StorageClass Values
-# values for storage class
-encrypted: true
-reclaimPolicy: Retain
-pool: default
-description: gluu-config-init-volume
-fsType: ext4
-provisioner: k8s.io/minikube-hostpath
-awsZones: us-west-2a
-gcePdStorageType: pd-standard
-azureStorageAccountType: Standard_LRS
-azureStorageKind: Shared
-
 # VolumeClaim values
 volumeclaim:
   storage: 1Gi

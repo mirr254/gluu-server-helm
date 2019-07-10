@@ -14,3 +14,53 @@ gluuRedisEnabled: false
 gluuRedisCacheType: REDIS
 gluuRedisUrl: redis:6379
 gluuRedisType: STANDALONE
+
+#StatefulSet values declaration
+statefulSetReplicas: 1
+imagePullPolicy: Always
+image: gluufederation/opendj:3.1.6_02
+
+#servicePorts values used in StatefulSet container
+ports:
+  ldaps:
+    port: 1636
+    targetPort: 1636
+  ldap:
+    port: 1389
+    targetPort: 1389
+  replication:
+    port: 8989
+    targetPort: 8989
+  admin:
+    port: 4444
+    targetPort: 4444
+
+#volumeMounts for StatefulSet
+volumeMounts:
+  opendj-volume:
+    mountPath: /opt/opendj/config
+    subPath: config
+  opendj-volume: 
+    mountPath: /opt/opendj/ldif
+    subPath: ldif
+  opendj-volume: 
+    mountPath: /opt/opendj/logs
+    subPath: logs
+  opendj-volume: 
+    mountPath: /opt/opendj/db
+    subPath: db
+  opendj-volume: 
+    mountPath: /flag
+    subPath: flag
+  
+  #container specific values declared here
+  readinessProbe:
+    tcpSocket:
+      port: 1636
+    initialDelaySeconds: 25
+    periodSeconds: 25
+  livenessProbe:
+    tcpSocket:
+      port: 1636
+    initialDelaySeconds: 30
+    periodSeconds: 30

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "gluu.fullname" . }}-init-ss
+spec:
+  serviceName: {{ template "gluu.fullname" . }}-service
+  replicas: {{ .Values.statefulSetReplicas }}
+  selector:
+    matchLabels:
+      app: {{ template "gluu.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "gluu.fullname" . }}
+  spec:
+    volumes:
+      - name: {{ template "gluu.fullname" . }}
+        persistentVolumeClaim:
+          claimName: {{ template "gluu.fullname" }}-pvc
+    containers:
+    - name: {{ template "gluu.fullname" . }}-init-container
+      imagePullPolicy: {{ .Values.imagePullPolicy }}
+      image: {{ .Values.image }}
+      envFrom:
+      - configMapRef:
+        name: {{ template "gluu.fullname" . }}-init-cm
+      ports:
+        {{- range $key, $value .Values.ports}}
+        - containerPort: {{ $value.targetPort }}
+          name: {{ $key }}
+        {{- end }}
+      volumeMounts:
+        {{- range $key, $value .Values.volumePorts }}
+        - mountPath: {{ $value.mountPath}}
+          name: {{ $key }}
+        {{- end }}
+      readinessProbe:
+        tcpSocket: 
+          port: {{ .Values.readinessProbe.tcpSocket.port }}
+        initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+        periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+      livenessProbe:
+        tcpSocket:
+          port: {{ .Values.livenessProbe.tcpSocket.port }}
+        initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+        periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
