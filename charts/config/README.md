@@ -45,4 +45,17 @@ For the config-init environment variables, use the variables under config. You c
 
 The other way is to use `--set` flag when installing the chart. Example of nested values, `--set config.orgName=K8s`
 
+`NOTE :`   
+The value `provisioner` that is under `storageclass` must be changed to the correct cloud provider in use. In our case, we have taken care of the major 3 cloud providers. i.e `GCP`,`AWS` and `AZURE`.
+
+The following values should be used as provisioner for different types of cloud providers.
+
+|  Cloud Provider  |  provisioner               |
+|  --------------  |  ------------------------- |
+|  AWS             |  kubernetes.io/aws-ebs     |
+|  GKE             |  kubernetes.io/gce-pd      |
+|  AZURE           |  kubernetes.io/azure-disk  |  
+
+One will need to change different values based on the provisioner used. For example, if you choose `kubernetes.io/aws-ebs` you may need to change the value of `awsZones` to fit the zone you are using. Refer to [kubernetes.io](https://kubernetes.io/docs/concepts/storage/storage-classes/) for more details on what parameters to use for your provisioner.
+
 One more thing to note here is that the `ConfigMap` has a namespace metadata variable. Which is globally referenced in the charts. it can be changed the same way described above but in this case we use the parent value `global`.

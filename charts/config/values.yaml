@@ -1,5 +1,5 @@
+# Required environment variables for generating Gluu server initial config
 #values for environment variables
-
 orgName: Gluu
 adminPass: password
 email: support@gluu.com
@@ -9,19 +9,18 @@ state: TE
 city: SLC
 ldapType: opendj
 
+# StorageClass Values
 # values for storage class
-storageclass:
-  encrypted: true
-  reclaimPolicy: Retain
-  pool: default
-  description: gluu-config-init-volume
-  fsType: ext4
-  provisioner: k8s.io/minikube-hostpath
-  awsZones: us-west-2a
-  gcePdStorageType: pd-standard
-  azureStorageAccountType: Standard_LRS
-  azureStorageKind: Shared
-
+encrypted: true
+reclaimPolicy: Retain
+pool: default
+description: gluu-config-init-volume
+fsType: ext4
+provisioner: k8s.io/minikube-hostpath
+awsZones: us-west-2a
+gcePdStorageType: pd-standard
+azureStorageAccountType: Standard_LRS
+azureStorageKind: Shared
 
 # VolumeClaim values
 volumeclaim:

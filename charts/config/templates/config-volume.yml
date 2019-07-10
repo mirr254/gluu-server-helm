@@ -6,26 +6,26 @@ metadata:
     app: {{ template "gluu.fullname" . }}
   annotations:
     storageclass.beta.kubernetes.io/is-default-class: "false"
-provisioner: {{ .Values.storageclass.provisioner }}
+provisioner: {{ .Values.provisioner }}
 parameters:
-  {{- if eq .Values.storageclass.provisioner "kubernetes.io/aws-ebs" }}
+  {{- if eq .Values.provisioner "kubernetes.io/aws-ebs" }}
   type: gp2
   encrypted: "true"
-  zones: {{ .Values.storageclass.zones }}
-  description: {{ .Values.storageclass.description }}
-  {{- else if eq .Values.storageclass.provisioner "kubernetes.io/gce-pd" }}
-  type: {{ .Values.storageclass.gcePdStorageType }}
-  description: {{ .Values.storageclass.description }}
-  {{- else if eq .Values.storageclass.provisioner "kubernetes.io/azure-disk" }}
-  storageAccountType: {{ .Values.storageclass.azureStorageAccountType }}
-  kind: {{ .Values.storageclass.azureStorageKind }}
+  zones: {{ .Values.zones }}
+  description: {{ .Values.description }}
+  {{- else if eq .Values.provisioner "kubernetes.io/gce-pd" }}
+  type: {{ .Values.gcePdStorageType }}
+  description: {{ .Values.description }}
+  {{- else if eq .Values.provisioner "kubernetes.io/azure-disk" }}
+  storageAccountType: {{ .Values.azureStorageAccountType }}
+  kind: {{ .Values.azureStorageKind }}
   {{- else }}
-  pool: {{ .Values.storageclass.pool }}
-  description: {{ .Values.storageclass.description }}
-  fsType: {{ .Values.storageclass.fsType }}
+  pool: {{ .Values.pool }}
+  description: {{ .Values.description }}
+  fsType: {{ .Values.fsType }}
   {{- end }}
 allowVolumeExpansion: true
-reclaimPolicy: {{ .Values.storageclass.reclaimPolicy }}
+reclaimPolicy: {{ .Values.reclaimPolicy }}
 mountOptions:
   - debug
   

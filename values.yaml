@@ -1,5 +1,6 @@
 # Declare variables to be passed into your templates.
 
+# Required environment variables for generating Gluu server initial config
 # values for config-init sub-chart
 config:
   orgName: gluu
@@ -15,6 +16,18 @@ config:
   city: SLC
   # ldapType only OpenDJ is supported
   ldapType: opendj
+  # StorageClass values
+  # values used to define the StorageClass template
+  encrypted: true
+  reclaimPolicy: Retain
+  pool: default
+  description: gluu-config-init-volume
+  fsType: ext4
+  provisioner: k8s.io/minikube-hostpath
+  awsZones: us-west-2a
+  gcePdStorageType: pd-standard
+  azureStorageAccountType: Standard_LRS
+  azureStorageKind: Shared
   
 global:
   namespace: default
