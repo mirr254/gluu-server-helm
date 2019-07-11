@@ -20,6 +20,10 @@ statefulSetReplicas: 1
 imagePullPolicy: Always
 image: gluufederation/opendj:3.1.6_02
 
+# VolumeClaim values
+volumeclaim:
+  storage: 20Gi
+
 #servicePorts values used in StatefulSet container
 ports:
   ldaps:
@@ -53,14 +57,14 @@ volumeMounts:
     mountPath: /flag
     subPath: flag
   
-  #container specific values declared here
-  readinessProbe:
-    tcpSocket:
-      port: 1636
-    initialDelaySeconds: 25
-    periodSeconds: 25
-  livenessProbe:
-    tcpSocket:
-      port: 1636
-    initialDelaySeconds: 30
-    periodSeconds: 30
+#container specific values declared here
+readinessProbe:
+  tcpSocket:
+    port: 1636
+  initialDelaySeconds: 25
+  periodSeconds: 25
+livenessProbe:
+  tcpSocket:
+    port: 1636
+  initialDelaySeconds: 30
+  periodSeconds: 30

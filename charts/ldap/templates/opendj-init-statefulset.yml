@@ -25,12 +25,12 @@ spec:
       - configMapRef:
         name: {{ template "gluu.fullname" . }}-init-cm
       ports:
-        {{- range $key, $value .Values.ports}}
+        {{- range $key, $value := .Values.ports}}
         - containerPort: {{ $value.targetPort }}
           name: {{ $key }}
         {{- end }}
       volumeMounts:
-        {{- range $key, $value .Values.volumePorts }}
+        {{- range $key, $value := .Values.volumePorts }}
         - mountPath: {{ $value.mountPath}}
           name: {{ $key }}
         {{- end }}
