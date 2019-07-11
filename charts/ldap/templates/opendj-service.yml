@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "gluu.fullname" . }}-service
+  name: {{ template "gluu.fullname" . }}-opendj-service
   labels:
-    app: {{ template "gluu.fullname" . }}
+    app: {{ template "gluu.fullname" . }}-opendj
 spec:
   ports:
     {{- range $key, $value := .Values.ports }}

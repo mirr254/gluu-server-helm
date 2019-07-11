@@ -1,6 +1,5 @@
-# Declare variables to be passed into your templates.
-
-# opendj ConfigMap values
+# opendj Environament Variables
+# common ConfigMap values
 gluuConfigAdapter: kubernetes
 gluuSecretAdapter: kubernetes
 gluuLdapInit: true
@@ -14,8 +13,12 @@ gluuRedisEnabled: false
 gluuRedisCacheType: REDIS
 gluuRedisUrl: redis:6379
 gluuRedisType: STANDALONE
+#repl diferent env vars
+gluuLdapInitRepl: false
+gluuOxtrustConfigGenerationRepl: false
 
-#StatefulSet values declaration
+# StatefulSet 
+# values declaration
 statefulSetReplicas: 1
 imagePullPolicy: Always
 image: gluufederation/opendj:3.1.6_02
@@ -23,6 +26,18 @@ image: gluufederation/opendj:3.1.6_02
 # VolumeClaim values
 volumeclaim:
   storage: 20Gi
+
+#container specific values declared here
+readinessProbe:
+  tcpSocket:
+    port: 1636
+  initialDelaySeconds: 25
+  periodSeconds: 25
+livenessProbe:
+  tcpSocket:
+    port: 1636
+  initialDelaySeconds: 30
+  periodSeconds: 30
 
 #servicePorts values used in StatefulSet container
 ports:
@@ -38,33 +53,39 @@ ports:
   admin:
     port: 4444
     targetPort: 4444
-
-#volumeMounts for StatefulSet
-volumeMounts:
-  opendj-volume:
+# VolumeMounts for StatefulSet
+# opendj-init vm
+volumeInitMounts:
+  config:
     mountPath: /opt/opendj/config
-    subPath: config
-  opendj-volume: 
+    name: opendj-init-ss-volume
+  ldif: 
     mountPath: /opt/opendj/ldif
-    subPath: ldif
-  opendj-volume: 
+    name: opendj-init-ss-volume
+  logs: 
     mountPath: /opt/opendj/logs
-    subPath: logs
-  opendj-volume: 
+    name: opendj-init-ss-volume
+  db: 
     mountPath: /opt/opendj/db
-    subPath: db
-  opendj-volume: 
+    name: opendj-init-ss-volume
+  flag: 
     mountPath: /flag
-    subPath: flag
-  
-#container specific values declared here
-readinessProbe:
-  tcpSocket:
-    port: 1636
-  initialDelaySeconds: 25
-  periodSeconds: 25
-livenessProbe:
-  tcpSocket:
-    port: 1636
-  initialDelaySeconds: 30
-  periodSeconds: 30
+    name: opendj-init-ss-volume
+
+#opedj-repl vm
+volumeReplMounts:
+  config:
+    mountPath: /opt/opendj/config
+    name: opendj-repl-ss-volume
+  ldif: 
+    mountPath: /opt/opendj/ldif
+    name: opendj-repl-ss-volume
+  logs: 
+    mountPath: /opt/opendj/logs
+    name: opendj-repl-ss-volume
+  db: 
+    mountPath: /opt/opendj/db
+    name: opendj-repl-ss-volume
+  flag: 
+    mountPath: /flag
+    name: opendj-repl-ss-volume

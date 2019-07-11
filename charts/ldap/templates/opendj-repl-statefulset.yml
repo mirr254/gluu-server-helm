@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ template "gluu.fullname" . }}-init-ss
+  name: {{ template "gluu.fullname" . }}-repl-ss
 spec:
   serviceName: {{ template "gluu.fullname" . }}-opendj-service
   replicas: {{ .Values.statefulSetReplicas }}
@@ -13,24 +13,33 @@ spec:
       labels:
         app: {{ template "gluu.fullname" . }}-opendj
   spec:
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - {{ template "gluu.fullname" . }}-opendj
     volumes:
-      - name: opendj-init-ss-volume
+      - name: opendj-repl-ss-volume
         persistentVolumeClaim:
-          claimName: {{ template "gluu.fullname" . }}-pvc
+          claimName: {{ template "gluu.fullname" . }}-repl-pvc
     containers:
-    - name: {{ template "gluu.fullname" . }}-init-container
+    - name: {{ template "gluu.fullname" . }}-repl-container
       imagePullPolicy: {{ .Values.imagePullPolicy }}
       image: {{ .Values.image }}
       envFrom:
       - configMapRef:
-        name: {{ template "gluu.fullname" . }}-init-cm
+        name: {{ template "gluu.fullname" . }}-repl-cm
       ports:
         {{- range $key, $value := .Values.ports}}
         - containerPort: {{ $value.targetPort }}
           name: {{ $key }}
         {{- end }}
       volumeMounts:
-        {{- range $key, $value := .Values.volumeInitMounts }}
+        {{- range $key, $value := .Values.volumeReplMounts }}
         - mountPath: {{ $value.mountPath }}
           name: {{ $value.name }}
           subPath: {{ $key }}
