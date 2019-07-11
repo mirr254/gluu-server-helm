@@ -16,7 +16,7 @@ spec:
     volumes:
       - name: opendj-init-ss-volume
         persistentVolumeClaim:
-          claimName: {{ template "gluu.fullname" . }}-pvc
+          claimName: {{ template "gluu.fullname" . }}-init-pvc
     containers:
     - name: {{ template "gluu.fullname" . }}-init-container
       imagePullPolicy: {{ .Values.imagePullPolicy }}

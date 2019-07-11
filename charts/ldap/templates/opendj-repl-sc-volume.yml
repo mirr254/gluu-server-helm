@@ -1,9 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: {{ template "gluu.fullname" . }}-gluu-sc
-  labels:
-    app: {{ template "gluu.fullname" . }}-gluu-sc
+  name: {{ template "gluu.fullname" . }}-repl-sc
   annotations:
     storageclass.beta.kubernetes.io/is-default-class: "false"
 provisioner: {{ .Values.global.provisioner }}
