@@ -4,5 +4,5 @@ metadata:
   name: {{ template "gluu.fullname" . }}-load-cm
   namespace: {{ .Values.global.namespace }}
 data:
-  GLUU_CONFIG_ADAPTER: {{ .Values.global.configAdapterName }}
-  GLUU_SECRET_ADAPTER: {{ .Values.global.configSecretAdapter }}
+  GLUU_CONFIG_ADAPTER: {{ .Values.configAdapterName }}
+  GLUU_SECRET_ADAPTER: {{ .Values.configSecretAdapter }}

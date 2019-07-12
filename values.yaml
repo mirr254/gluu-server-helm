@@ -16,6 +16,9 @@ config:
   city: SLC
   # ldapType only OpenDJ is supported
   ldapType: opendj
+  configAdapterName: kubernetes
+  configSecretAdapter: kubernetes
+  
   # StorageClass values
   # values used to define the StorageClass template
   encrypted: true
@@ -31,8 +34,6 @@ config:
   
 global:
   namespace: default
-  configAdapterName: kubernetes
-  configSecretAdapter: kubernetes
   gluuConfigK8sNamespace: default
   gluuConfigK8sConfigmap: gluu
   gluuConfigK8sUseKubeConfig: false
