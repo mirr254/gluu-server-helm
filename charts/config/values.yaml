@@ -8,6 +8,8 @@ countryCode: US
 state: TE
 city: SLC
 ldapType: opendj
+configAdapterName: kubernetes
+configSecretAdapter: kubernetes
 
 # StorageClass Values
 # values for storage class
