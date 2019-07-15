@@ -1,12 +1,15 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "gluu.fullname" . }}-config-init-load
+  name: {{ template "gluu.fullname" . }}-load
+  annotations:
+    "helm.sh/hook": post-install, post-upgrade
+    "helm.sh/hook-weight": "0"
 spec:
   template:
     metadata:
       labels: 
-        app: {{ template "gluu.fullname" . }}-config-init-load
+        app: {{ template "gluu.fullname" . }}-load
     spec: 
       restartPolicy: Never
       volumes:
@@ -14,7 +17,7 @@ spec:
           persistentVolumeClaim:
             claimName: {{ template "gluu.fullname" . }}-config-volume-claim
       containers:
-        - name: {{ template "gluu.fullname" . }}-config-init-load
+        - name: {{ template "gluu.fullname" . }}-load
           image: gluufederation/config-init:3.1.6_03
           volumeMounts:
             - mountPath: /opt/config-init/db
