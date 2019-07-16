@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "gluu.fullname" . }}-config-volume-claim
+  name: {{ template "gluu.fullname" . }}-config-pvc
 spec:
   storageClassName: {{ template "gluu.fullname" . }}-storage-class
   accessModes:

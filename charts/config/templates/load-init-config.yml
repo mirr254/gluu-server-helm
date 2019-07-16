@@ -2,30 +2,39 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ template "gluu.fullname" . }}-load
-  annotations:
-    "helm.sh/hook": post-install, post-upgrade
-    "helm.sh/hook-weight": "0"
 spec:
+  parallelism: 1
+  completions: null
   template:
     metadata:
-      labels: 
+      name: {{ template "gluu.fullname" . }}-job
+      labels:
         app: {{ template "gluu.fullname" . }}-load
-    spec: 
-      restartPolicy: Never
+    spec:
       volumes:
         - name: {{ template "gluu.fullname" . }}-config
           persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-config-volume-claim
+            claimName: {{ template "gluu.fullname" . }}-config-pvc
+      initContainers:
+      - name: pop-from-queue-unsafe
+        image: gluufederation/config-init:3.1.6_03
+        args: ["generate", "--admin-pw", "$(ADMIN_PW)", "--email", "$(EMAIL)", "--domain", "$(DOMAIN)", "--org-name", "$(ORG_NAME)", "--country-code", "$(COUNTRY_CODE)", "--state", "$(STATE)", "--city", "$(CITY)", "--ldap-type", "$(LDAP_TYPE)"]
+        volumeMounts:
+          - mountPath: /opt/config-init/db
+            name: {{ template "gluu.fullname" . }}-config
+            subPath: db
+        envFrom:
+        - configMapRef:
+            name: {{ template "gluu.fullname" . }}-config-cm
       containers:
-        - name: {{ template "gluu.fullname" . }}-load
-          image: gluufederation/config-init:3.1.6_03
-          volumeMounts:
-            - mountPath: /opt/config-init/db
-              name: {{ template "gluu.fullname" . }}-config
-              subPath: db
-          envFrom:
-          - configMapRef:
-              name: {{ template "gluu.fullname" . }}-load-cm
-          args: [ "load" ]
-
-
+      - name: {{ template "gluu.fullname" . }}-load
+        image: gluufederation/config-init:3.1.6_03
+        volumeMounts:
+          - mountPath: /opt/config-init/db/
+            name: {{ template "gluu.fullname" . }}-config
+        envFrom:
+        - configMapRef:
+            name: {{ template "gluu.fullname" . }}-load-cm
+        args: [ "load" ]
+      restartPolicy: Never
+          
