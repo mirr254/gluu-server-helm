@@ -8,4 +8,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.volumeclaim.storage }}
+      storage: {{ .Values.volumeClaim.storage }}

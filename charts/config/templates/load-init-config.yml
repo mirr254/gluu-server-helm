@@ -1,40 +1,29 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "gluu.fullname" . }}-load
+  name: {{ template "gluu.fullname" . }}
 spec:
-  parallelism: 1
-  completions: null
+  parallelism: {{ .Values.parallelism }}
+  completions: {{ .Values.completions }}
   template:
     metadata:
-      name: {{ template "gluu.fullname" . }}-job
+      name: {{ template "gluu.name" . }}-job
       labels:
-        app: {{ template "gluu.fullname" . }}-load
+        app: {{ template "gluu.name" . }}-load
     spec:
       volumes:
-        - name: {{ template "gluu.fullname" . }}-config
+        - name: {{ template "gluu.name" . }}-config
           persistentVolumeClaim:
             claimName: {{ template "gluu.fullname" . }}-config-pvc
-      initContainers:
-      - name: pop-from-queue-unsafe
-        image: gluufederation/config-init:3.1.6_03
-        args: ["generate", "--admin-pw", "$(ADMIN_PW)", "--email", "$(EMAIL)", "--domain", "$(DOMAIN)", "--org-name", "$(ORG_NAME)", "--country-code", "$(COUNTRY_CODE)", "--state", "$(STATE)", "--city", "$(CITY)", "--ldap-type", "$(LDAP_TYPE)"]
+      containers:
+      - name: {{ template "gluu.name" . }}-load
+        image: gluufederation/config-init:4.0.0_dev
         volumeMounts:
-          - mountPath: /opt/config-init/db
-            name: {{ template "gluu.fullname" . }}-config
-            subPath: db
+          - mountPath: /opt/config-init/db/
+            name: {{ template "gluu.name" . }}-config
         envFrom:
         - configMapRef:
             name: {{ template "gluu.fullname" . }}-config-cm
-      containers:
-      - name: {{ template "gluu.fullname" . }}-load
-        image: gluufederation/config-init:3.1.6_03
-        volumeMounts:
-          - mountPath: /opt/config-init/db/
-            name: {{ template "gluu.fullname" . }}-config
-        envFrom:
-        - configMapRef:
-            name: {{ template "gluu.fullname" . }}-load-cm
-        args: [ "load" ]
+        args: [ "dump" ]
       restartPolicy: Never
           

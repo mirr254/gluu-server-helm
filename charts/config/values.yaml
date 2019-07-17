@@ -12,5 +12,9 @@ configAdapterName: kubernetes
 configSecretAdapter: kubernetes
 
 # VolumeClaim values
-volumeclaim:
+volumeClaim:
   storage: 1Gi
+
+#Job values
+parallelism: 1
+completions: null

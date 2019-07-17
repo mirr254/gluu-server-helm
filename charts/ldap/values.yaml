@@ -21,11 +21,11 @@ gluuOxtrustConfigGenerationRepl: false
 # values declaration
 statefulSetReplicas: 1
 imagePullPolicy: Always
-image: gluufederation/opendj:3.1.6_03
+image: gluufederation/opendj:4.0.0_dev
 
 # VolumeClaim values
-volumeclaim:
-  storage: 20Gi
+volumeClaim:
+  storage: 5Gi
 
 #container specific values declared here
 readinessProbe:
@@ -89,3 +89,27 @@ volumeReplMounts:
   flag: 
     mountPath: /flag
     name: opendj-repl-ss-volume
+
+#PersistentVolume
+capacity:
+  storage: 100M
+accessModes:
+  - ReadWriteOnce
+
+#opendj-config-pv
+opendj-config:
+  hostPath:
+    path: "/data/opendj/config"
+    type: DirectoryOrCreate
+
+#opendj-ldif
+opendj-ldif:
+  hostPath:
+    path: "/data/opendj/ldif"
+    type: DirectoryOrCreate
+
+#opendj-logs
+opendj-logs:
+  hostPath:
+    path: "/data/opendj/logs"
+    type: DirectoryOrCreate
