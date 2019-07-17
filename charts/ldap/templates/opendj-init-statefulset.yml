@@ -12,36 +12,36 @@ spec:
     metadata:
       labels:
         app: {{ template "gluu.fullname" . }}-opendj
-  spec:
-    volumes:
-      - name: opendj-init-ss-volume
-        persistentVolumeClaim:
-          claimName: {{ template "gluu.fullname" . }}-init-pvc
-    containers:
-    - name: {{ template "gluu.fullname" . }}-init-container
-      imagePullPolicy: {{ .Values.imagePullPolicy }}
-      image: {{ .Values.image }}
-      envFrom:
-      - configMapRef:
-        name: {{ template "gluu.fullname" . }}-init-cm
-      ports:
-        {{- range $key, $value := .Values.ports}}
-        - containerPort: {{ $value.targetPort }}
-          name: {{ $key }}
-        {{- end }}
-      volumeMounts:
-        {{- range $key, $value := .Values.volumeInitMounts }}
-        - mountPath: {{ $value.mountPath }}
-          name: {{ $value.name }}
-          subPath: {{ $key }}
-        {{- end }}
-      readinessProbe:
-        tcpSocket: 
-          port: {{ .Values.readinessProbe.tcpSocket.port }}
-        initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
-        periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
-      livenessProbe:
-        tcpSocket:
-          port: {{ .Values.livenessProbe.tcpSocket.port }}
-        initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-        periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+    spec:
+      volumes:
+        - name: opendj-init-ss-volume
+          persistentVolumeClaim:
+            claimName: {{ template "gluu.fullname" . }}-init-pvc
+      containers:
+      - name: {{ template "gluu.fullname" . }}-init-container
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        image: {{ .Values.image }}
+        envFrom:
+        - configMapRef:
+            name: {{ template "gluu.fullname" . }}-init-cm
+        ports:
+          {{- range $key, $value := .Values.ports}}
+          - containerPort: {{ $value.targetPort }}
+            name: {{ $key }}
+          {{- end }}
+        volumeMounts:
+          {{- range $key, $value := .Values.volumeInitMounts }}
+          - mountPath: {{ $value.mountPath }}
+            name: {{ $value.name }}
+            subPath: {{ $key }}
+          {{- end }}
+        readinessProbe:
+          tcpSocket: 
+            port: {{ .Values.tcpSocket.port }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.tcpSocket.port }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}

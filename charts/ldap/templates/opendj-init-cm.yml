@@ -16,3 +16,4 @@ data:
   GLUU_REDIS_TYPE: {{ .Values.gluuRedisType | quote }}
   {{- end }}
   GLUU_CERT_ALT_NAME: {{ .Values.gluuCertAltName | quote }}
+  

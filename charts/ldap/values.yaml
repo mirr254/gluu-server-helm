@@ -3,7 +3,7 @@
 gluuConfigAdapter: kubernetes
 gluuSecretAdapter: kubernetes
 gluuLdapInit: true
-gluuLdapInitHost: opendj
+gluuLdapInitHost: localhost
 gluuLdapInitPort: 1636
 gluuOxtrustConfigGeneration: true
 gluuCacheType: NATIVE_PERSISTENCE
