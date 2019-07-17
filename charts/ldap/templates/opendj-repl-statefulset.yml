@@ -46,11 +46,11 @@ spec:
         {{- end }}
       readinessProbe:
         tcpSocket: 
-          port: {{ .Values.readinessProbe.tcpSocket.port }}
+          port: {{ .Values.tcpSocket.port }}
         initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
         periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
       livenessProbe:
         tcpSocket:
-          port: {{ .Values.livenessProbe.tcpSocket.port }}
+          port: {{ .Values.tcpSocket.port }}
         initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
         periodSeconds: {{ .Values.livenessProbe.periodSeconds }}

@@ -28,14 +28,12 @@ volumeClaim:
   storage: 5Gi
 
 #container specific values declared here
+tcpSocket:
+  port: 1636
 readinessProbe:
-  tcpSocket:
-    port: 1636
   initialDelaySeconds: 25
   periodSeconds: 25
 livenessProbe:
-  tcpSocket:
-    port: 1636
   initialDelaySeconds: 30
   periodSeconds: 30
 
