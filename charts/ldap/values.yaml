@@ -90,9 +90,9 @@ volumeReplMounts:
 
 #PersistentVolume
 capacity:
-  storage: 100M
+  storage: 50M
 accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
 
 #opendj-config-pv
 opendj-config:

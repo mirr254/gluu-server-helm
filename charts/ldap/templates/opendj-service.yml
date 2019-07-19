@@ -14,4 +14,4 @@ spec:
     {{- end }}
   clusterIP: None
   selector:
-    app: {{ template "gluu.fullname" . }}
+    app: {{ template "gluu.fullname" . }}-opendj

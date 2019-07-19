@@ -3,7 +3,7 @@ apiVersion: v1
 metadata: 
   name: {{ template "gluu.fullname" . }}-init-pvc
 spec:
-  storageClassName: {{ template "gluu.fullname" . }}-gluu-sc
+  storageClassName: {{ template "gluu.fullname" . }}-opendj-init-sc
   {{- with .Values.accessModes }}
   accessModes:
   {{ toYaml . | indent 2 }}

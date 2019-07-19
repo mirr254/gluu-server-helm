@@ -1,22 +1,19 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ template "gluu.fullname" . }}-init-ss
+  name: {{ template "gluu.fullname" . }}-opendj-init
 spec:
-  serviceName: {{ template "gluu.fullname" . }}-opendj-service
-  replicas: {{ .Values.statefulSetReplicas }}
   selector:
     matchLabels:
-      app: {{ template "gluu.fullname" . }}-opendj
+      app: {{ template "gluu.fullname" . }}-opendj # has to match .spec.template.metadata.labels
+  serviceName: {{ template "gluu.fullname" . }}-opendj-service
+  replicas: {{ .Values.statefulSetReplicas }} # by default is 1
   template:
     metadata:
       labels:
-        app: {{ template "gluu.fullname" . }}-opendj
+        app: {{ template "gluu.fullname" . }}-opendj # has to match .spec.selector.matchLabels
     spec:
-      volumes:
-        - name: opendj-init-ss-volume
-          persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-init-pvc
+      terminationGracePeriodSeconds: 10
       containers:
       - name: {{ template "gluu.fullname" . }}-init-container
         imagePullPolicy: {{ .Values.imagePullPolicy }}
@@ -25,16 +22,15 @@ spec:
         - configMapRef:
             name: {{ template "gluu.fullname" . }}-init-cm
         ports:
-          {{- range $key, $value := .Values.ports}}
+          {{- range $key, $value := .Values.ports }}
           - containerPort: {{ $value.targetPort }}
             name: {{ $key }}
           {{- end }}
         volumeMounts:
-          {{- range $key, $value := .Values.volumeInitMounts }}
-          - mountPath: {{ $value.mountPath }}
-            name: {{ $value.name }}
-            subPath: {{ $key }}
-          {{- end }}
+        {{- range $key, $value := .Values.volumeInitMounts }}
+        - name: {{ $value.name }}
+          mountPath: {{ $value.mountPath }}
+        {{- end }}
         readinessProbe:
           tcpSocket: 
             port: {{ .Values.tcpSocket.port }}
@@ -45,3 +41,12 @@ spec:
             port: {{ .Values.tcpSocket.port }}
           initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+  volumeClaimTemplates:
+  - metadata:
+      name: opendj-init-ss-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: {{ template "gluu.fullname" . }}-opendj-init-sc
+      resources:
+        requests:
+          storage: 1Gi
