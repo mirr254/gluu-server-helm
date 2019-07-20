@@ -47,10 +47,14 @@ spec:
         - configMapRef:
             name: {{ template "gluu.fullname" . }}-init-cm
         ports:
-          {{- range $key, $value := .Values.ports }}
-          - containerPort: {{ $value.targetPort }}
-            name: {{ $key }}
-          {{- end }}
+          - containerPort: 1636
+            name: ldaps
+          - containerPort: 1389
+            name: ldap
+          - containerPort: 8989
+            name: replication
+          - containerPort: 4444
+            name: admin
         volumeMounts:
           - mountPath: /opt/opendj/config
             name: {{ template "gluu.fullname" . }}-config
