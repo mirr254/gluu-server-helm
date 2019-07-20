@@ -15,5 +15,6 @@ data:
   GLUU_REDIS_URL: {{ .Values.gluuRedisUrl | quote }}
   GLUU_REDIS_TYPE: {{ .Values.gluuRedisType | quote }}
   {{- end }}
-  GLUU_CERT_ALT_NAME: {{ .Values.gluuCertAltName | quote }}
+  # must the same as the opendj service name
+  GLUU_CERT_ALT_NAME: {{ template "gluu.fullname" . }}-service
   
