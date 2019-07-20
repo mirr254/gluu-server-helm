@@ -1,19 +1,44 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ template "gluu.fullname" . }}-opendj-init
+  name: {{ template "gluu.fullname" . }}-init-ss
 spec:
   selector:
     matchLabels:
-      app: {{ template "gluu.fullname" . }}-opendj # has to match .spec.template.metadata.labels
+      app: {{ template "gluu.fullname" . }}-init # has to match .spec.template.metadata.labels
   serviceName: {{ template "gluu.fullname" . }}-opendj-service
   replicas: {{ .Values.statefulSetReplicas }} # by default is 1
   template:
     metadata:
       labels:
-        app: {{ template "gluu.fullname" . }}-opendj # has to match .spec.selector.matchLabels
+        app: {{ template "gluu.fullname" . }}-init # has to match .spec.selector.matchLabels
     spec:
-      terminationGracePeriodSeconds: 10
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - {{ template "gluu.fullname" . }}-init
+            topologyKey: "kubernetes.io/hostname"
+      volumes:
+        - name: {{ template "gluu.fullname" . }}-config
+          persistentVolumeClaim:
+            claimName: {{ template "gluu.fullname" . }}-config-pvc
+        - name: {{ template "gluu.fullname" . }}-ldif
+          persistentVolumeClaim:
+            claimName: {{ template "gluu.fullname" . }}-ldif-pvc
+        - name: {{ template "gluu.fullname" . }}-logs
+          persistentVolumeClaim:
+            claimName: {{ template "gluu.fullname" . }}-logs-pvc
+        - name: {{ template "gluu.fullname" . }}-db
+          persistentVolumeClaim:
+            claimName: {{ template "gluu.fullname" . }}-db-pvc
+        - name: {{ template "gluu.fullname" . }}-flag
+          persistentVolumeClaim:
+            claimName: {{ template "gluu.fullname" . }}-flag-pvc
       containers:
       - name: {{ template "gluu.fullname" . }}-init-container
         imagePullPolicy: {{ .Values.imagePullPolicy }}
@@ -27,10 +52,16 @@ spec:
             name: {{ $key }}
           {{- end }}
         volumeMounts:
-        {{- range $key, $value := .Values.volumeInitMounts }}
-        - name: {{ $value.name }}
-          mountPath: {{ $value.mountPath }}
-        {{- end }}
+          - mountPath: /opt/opendj/config
+            name: {{ template "gluu.fullname" . }}-config
+          - mountPath: /opt/opendj/ldif
+            name: {{ template "gluu.fullname" . }}-ldif
+          - mountPath: /opt/opendj/logs
+            name: {{ template "gluu.fullname" . }}-logs
+          - mountPath: /opt/opendj/db
+            name: {{ template "gluu.fullname" . }}-db
+          - mountPath: /flag
+            name: {{ template "gluu.fullname" . }}-flag
         readinessProbe:
           tcpSocket: 
             port: {{ .Values.tcpSocket.port }}
@@ -41,12 +72,4 @@ spec:
             port: {{ .Values.tcpSocket.port }}
           initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
-  volumeClaimTemplates:
-  - metadata:
-      name: opendj-init-ss-volume
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: {{ template "gluu.fullname" . }}-opendj-init-sc
-      resources:
-        requests:
-          storage: 1Gi
+  

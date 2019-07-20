@@ -17,15 +17,11 @@ gluuRedisType: STANDALONE
 gluuLdapInitRepl: false
 gluuOxtrustConfigGenerationRepl: false
 
-# StatefulSet 
+# StatefulSets 
 # values declaration
 statefulSetReplicas: 1
 imagePullPolicy: Always
 image: gluufederation/opendj:4.0.0_dev
-
-# VolumeClaim values
-volumeClaim:
-  storage: 5Gi
 
 #container specific values declared here
 tcpSocket:
@@ -88,11 +84,8 @@ volumeReplMounts:
     mountPath: /flag
     name: opendj-repl-ss-volume
 
-#PersistentVolume
-capacity:
-  storage: 50M
-accessModes:
-  - ReadWriteMany
+#VolumeClaimTemplates
+storage: 1Gi
 
 #opendj-config-pv
 opendj-config:
