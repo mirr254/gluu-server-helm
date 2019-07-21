@@ -5,13 +5,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: {{ template "gluu.fullname" . }}-opendj # has to match .spec.template.metadata.labels
+      app: {{ template "gluu.fullname" . }}-service # has to match .spec.template.metadata.labels
   serviceName: {{ template "gluu.fullname" . }}-service
   replicas: {{ .Values.statefulSetReplicas }} # by default is 1
   template:
     metadata:
       labels:
-        app: {{ template "gluu.fullname" . }}-opendj # has to match .spec.selector.matchLabels
+        app: {{ template "gluu.fullname" . }}-service # has to match .spec.selector.matchLabels
     spec:
       # affinity:
       #   podAntiAffinity:
@@ -21,7 +21,7 @@ spec:
       #         - key: app
       #           operator: In
       #           values:
-      #           - {{ template "gluu.fullname" . }}-opendj
+      #           - {{ template "gluu.fullname" . }}-service
       #       topologyKey: "kubernetes.io/hostname"
       volumes:
         - name: {{ template "gluu.fullname" . }}-config

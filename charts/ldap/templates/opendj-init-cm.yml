@@ -7,7 +7,7 @@ data:
   hostname: {{ .Values.hostname | quote }}
   GLUU_SECRET_ADAPTER: {{ .Values.gluuSecretAdapter | quote }}
   GLUU_LDAP_INIT: {{ .Values.gluuLdapInit | quote }}
-  GLUU_LDAP_INIT_HOST: {{ .Values.gluuLdapInitHost | quote }}
+  GLUU_LDAP_INIT_HOST: {{ template "gluu.fullname" . }}-service
   GLUU_LDAP_INIT_PORT: {{ .Values.gluuLdapInitPort | quote }}
   GLUU_OXTRUST_CONFIG_GENERATION: {{ .Values.gluuOxtrustConfigGeneration | quote }}
   GLUU_CACHE_TYPE: {{ .Values.gluuCacheType | quote }}

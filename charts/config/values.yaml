@@ -1,9 +1,9 @@
 # Required environment variables for generating Gluu server initial config
 #values for environment variables
 orgName: Gluu
-adminPass: password
+adminPass: P@ssw0rd
 email: support@gluu.com
-domain: localhost
+domain: kube.gluu.local
 countryCode: US
 state: TE
 city: SLC
@@ -14,7 +14,3 @@ configSecretAdapter: kubernetes
 # VolumeClaim values
 volumeClaim:
   storage: 1Gi
-
-#Job values
-parallelism: 1
-completions: null
