@@ -19,9 +19,9 @@ gluuMaxRamFraction: 1
 
 #Resources for the deployment
 requests:
-  memory: 536Mi
+  memory: 128Mi
 limits:
-  memory: 100Mi
+  memory: 128Mi
 
 #ports for the deployment
 ports:

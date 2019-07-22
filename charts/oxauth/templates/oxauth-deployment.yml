@@ -8,11 +8,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "gluu.fullname" . }}
+      app: {{ template "oxauth.fullname" . }}
   template:
     metadata:
       labels:
-        app: {{ template "gluu.fullname" . }}
+        app: {{ template "oxauth.fullname" . }}
     spec:
       containers:
       - name: {{ template "gluu.fullname" . }}
@@ -27,7 +27,7 @@ spec:
         - containerPort: {{ .Values.ports.containerPort }}
         envFrom:
         - configMapRef:
-            name: {{ template "gluu.fullname" . }}-cm
+            name: {{ template "oxauth.fullname" . }}-cm
         volumeMounts:
         {{- range $key, $value := .Values.volumeMounts }}
           - mountPath: {{ $value.mountPath }}
@@ -46,10 +46,10 @@ spec:
             port: {{ .Values.ports.containerPort }}
           initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
-      hostAliases:
-      - ip: NGINX_IP
-        hostnames:
-        - {{ .Values.domain }}
+      # hostAliases:
+      # - ip: NGINX_IP
+      #   hostnames:
+      #   - {{ .Values.domain }}
       volumes:
       - name: oxauth-volume
         persistentVolumeClaim:
