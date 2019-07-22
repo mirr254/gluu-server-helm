@@ -1,31 +1,33 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "gluu.fullname" . }}-load
-  annotations:
-    "helm.sh/hook": post-install, post-upgrade
-    "helm.sh/hook-weight": "0"
+  name: {{ template "gluu.fullname" . }}
 spec:
   template:
     metadata:
-      labels: 
-        app: {{ template "gluu.fullname" . }}-load
-    spec: 
-      restartPolicy: Never
+      name: {{ template "gluu.name" . }}-job
+      labels:
+        app: {{ template "gluu.name" . }}-load
+    spec:
       volumes:
-        - name: {{ template "gluu.fullname" . }}-config
+        - name: {{ template "gluu.name" . }}-config
           persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-config-volume-claim
+            claimName: {{ template "gluu.fullname" . }}-config-pvc
+        - name: {{ template "gluu.fullname" . }}-mount-gen-file
+          configMap:
+            name: {{ template "gluu.fullname" . }}-gen-json-file
       containers:
-        - name: {{ template "gluu.fullname" . }}-load
-          image: gluufederation/config-init:3.1.6_03
-          volumeMounts:
-            - mountPath: /opt/config-init/db
-              name: {{ template "gluu.fullname" . }}-config
-              subPath: db
-          envFrom:
-          - configMapRef:
-              name: {{ template "gluu.fullname" . }}-load-cm
-          args: [ "load" ]
-
-
+      - name: {{ template "gluu.name" . }}-load
+        image: gluufederation/config-init:4.0.0_dev
+        volumeMounts:
+          - mountPath: /opt/config-init/db/
+            name: {{ template "gluu.name" . }}-config
+          - mountPath: /opt/config-init/db/generate.json
+            name: {{ template "gluu.fullname" . }}-mount-gen-file
+            subPath: generate.json
+        envFrom:
+        - configMapRef:
+            name: {{ template "gluu.fullname" . }}-config-cm
+        args: [ "load" ]
+      restartPolicy: Never
+          

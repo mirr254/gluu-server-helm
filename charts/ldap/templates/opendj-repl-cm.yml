@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "gluu.fullname" . }}-repl-cm
+data:
+  GLUU_CONFIG_ADAPTER: {{ .Values.gluuConfigAdapter | quote }}
+  GLUU_SECRET_ADAPTER: {{ .Values.gluuSecretAdapter | quote }}
+  GLUU_LDAP_INIT: {{ .Values.gluuLdapInitRepl | quote }}
+  GLUU_LDAP_INIT_HOST: {{ .Values.gluuLdapInitHost | quote }}
+  GLUU_LDAP_INIT_PORT: {{ .Values.gluuLdapInitPort | quote }}
+  GLUU_OXTRUST_CONFIG_GENERATION: {{ .Values.gluuOxtrustConfigGenerationRepl | quote }}
+  GLUU_CACHE_TYPE: {{ .Values.gluuCacheType | quote }}
+  {{- if .Values.gluuRedisEnabled }}
+  GLUU_CACHE_TYPE: {{ .Values.gluuRedisCacheType | quote }}
+  GLUU_REDIS_URL: {{ .Values.gluuRedisUrl | quote }}
+  GLUU_REDIS_TYPE: {{ .Values.gluuRedisType | quote }}
+  {{- end }}
+  GLUU_CERT_ALT_NAME: {{ .Values.gluuCertAltName | quote }}

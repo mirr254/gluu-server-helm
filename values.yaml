@@ -34,6 +34,8 @@ config:
   
 global:
   namespace: default
+  configAdapterName: kubernetes
+  configSecretAdapter: kubernetes
   gluuConfigK8sNamespace: default
   gluuConfigK8sConfigmap: gluu
   gluuConfigK8sUseKubeConfig: false
@@ -41,7 +43,4 @@ global:
   gluuSecretK8sConfigmap: gluu
   gluuSecretK8sUseKubeConfig: false
   gluuSecretAdapter: kubernetes
-
-
-
-
+  provisioner: k8s.io/minikube-hostpath
