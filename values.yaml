@@ -31,6 +31,13 @@ config:
   gcePdStorageType: pd-standard
   azureStorageAccountType: Standard_LRS
   azureStorageKind: Shared
+
+oxauth:
+  enabled: true
+  dynamicStorage: true
+
+ldap:
+  enabled: true
   
 global:
   namespace: default
