@@ -52,37 +52,37 @@ ports:
 volumeInitMounts:
   config:
     mountPath: /opt/opendj/config
-    name: opendj-init-ss-volume
+    name: opendj-init-volume
   ldif: 
     mountPath: /opt/opendj/ldif
-    name: opendj-init-ss-volume
+    name: opendj-init-volume
   logs: 
     mountPath: /opt/opendj/logs
-    name: opendj-init-ss-volume
+    name: opendj-init-volume
   db: 
     mountPath: /opt/opendj/db
-    name: opendj-init-ss-volume
+    name: opendj-init-volume
   flag: 
     mountPath: /flag
-    name: opendj-init-ss-volume
+    name: opendj-init-volume
 
 #opedj-repl vm
 volumeReplMounts:
   config:
     mountPath: /opt/opendj/config
-    name: opendj-repl-ss-volume
+    name: opendj-repl-volume
   ldif: 
     mountPath: /opt/opendj/ldif
-    name: opendj-repl-ss-volume
+    name: opendj-repl-volume
   logs: 
     mountPath: /opt/opendj/logs
-    name: opendj-repl-ss-volume
+    name: opendj-repl-volume
   db: 
     mountPath: /opt/opendj/db
-    name: opendj-repl-ss-volume
+    name: opendj-repl-volume
   flag: 
     mountPath: /flag
-    name: opendj-repl-ss-volume
+    name: opendj-repl-volume
 
 #VolumeClaimTemplates
 storage: 1Gi

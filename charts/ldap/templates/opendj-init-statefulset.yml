@@ -24,21 +24,9 @@ spec:
       #           - {{ template "gluu.fullname" . }}-service
       #       topologyKey: "kubernetes.io/hostname"
       volumes:
-        - name: {{ template "gluu.fullname" . }}-config
+        - name: opendj-init-volume
           persistentVolumeClaim:
             claimName: {{ template "gluu.fullname" . }}-config-pvc
-        - name: {{ template "gluu.fullname" . }}-ldif
-          persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-ldif-pvc
-        - name: {{ template "gluu.fullname" . }}-logs
-          persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-logs-pvc
-        - name: {{ template "gluu.fullname" . }}-db
-          persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-db-pvc
-        - name: {{ template "gluu.fullname" . }}-flag
-          persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-flag-pvc
       containers:
       - name: {{ template "gluu.fullname" . }}-init-container
         imagePullPolicy: {{ .Values.imagePullPolicy }}
@@ -56,16 +44,11 @@ spec:
           - containerPort: 4444
             name: admin
         volumeMounts:
-          - mountPath: /opt/opendj/config
-            name: {{ template "gluu.fullname" . }}-config
-          - mountPath: /opt/opendj/ldif
-            name: {{ template "gluu.fullname" . }}-ldif
-          - mountPath: /opt/opendj/logs
-            name: {{ template "gluu.fullname" . }}-logs
-          - mountPath: /opt/opendj/db
-            name: {{ template "gluu.fullname" . }}-db
-          - mountPath: /flag
-            name: {{ template "gluu.fullname" . }}-flag
+        {{- with $key, $value := .Values.volumeInitMounts }}
+          - mountPath: {{ $value.mountPath }}
+            name: {{ $value.name }}
+            subPath: {{ $key }}
+        {{- end }}
         readinessProbe:
           tcpSocket: 
             port: {{ .Values.tcpSocket.port }}
