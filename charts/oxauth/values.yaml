@@ -1,6 +1,7 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
+dynamicStorage: true
 
 image:
   repository: oxauth
