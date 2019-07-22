@@ -35,16 +35,12 @@ spec:
         - configMapRef:
             name: {{ template "gluu.fullname" . }}-init-cm
         ports:
-          - containerPort: 1636
-            name: ldaps
-          - containerPort: 1389
-            name: ldap
-          - containerPort: 8989
-            name: replication
-          - containerPort: 4444
-            name: admin
+        {{- range $key, $value := .Values.ports }}
+          - containerPort: {{ $value.targetPort }}
+            name: {{ $key }}
+        {{- end }}
         volumeMounts:
-        {{- with $key, $value := .Values.volumeInitMounts }}
+        {{- range $key, $value := .Values.volumeInitMounts }}
           - mountPath: {{ $value.mountPath }}
             name: {{ $value.name }}
             subPath: {{ $key }}
