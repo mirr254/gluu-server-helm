@@ -13,7 +13,6 @@ volumeClaim:
   storage: 50M
 
 #ConfigMap values
-domain: kube.gluu.local
 gluuLdapUrl: opendj:1636
 gluuMaxRamFraction: 1
 

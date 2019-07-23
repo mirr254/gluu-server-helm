@@ -15,7 +15,7 @@ service:
   port: 80
 
 # PVC storage
-requests:
+volumeClaim:
   storage: 10M
 
 #resources: 
