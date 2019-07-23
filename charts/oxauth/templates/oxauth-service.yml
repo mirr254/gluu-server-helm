@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "oxauth.fullname" . }}-svc
+  labels:
+    app: {{ template "oxauth.fullname" . }}
+spec:
+  ports:
+  - port: {{ .Values.ports.containerPort }}
+    name: {{ template "oxauth.fullname" . }}
+  selector:
+    app: {{ template "oxauth.fullname" . }}
