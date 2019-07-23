@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "oxtrust.fullname" }}-pvc
+  labels:
+    app: {{ template "oxtrust.fullname" }}
+spec:
+  storageClassName: {{ template "oxtrust.fullname" . }}-storage
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.requests.storage }}

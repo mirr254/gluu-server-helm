@@ -1,0 +1,28 @@
+# Default values for oxtrust.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+dynamicStorage: true
+
+image:
+  repository: nginx
+  tag: stable
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+# PVC storage
+requests:
+  storage: 10M
+
+#resources: 
+limits:
+  memory: 128Mi
+requests:
+  memory: 128Mi
+
+gluuOxauthBackend: oxauth:8080
+
