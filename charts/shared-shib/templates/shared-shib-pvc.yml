@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "gluu.name" . }}-pvc
+spec:
+  storageClassName: {{ template "gluu.fullname" . }}-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.requests.storage }}
+  
