@@ -23,6 +23,9 @@ requests:
 limits:
   memory: 128Mi
 
+#hostAliases
+nginxIP: 192.168.99.100
+
 #ports for the deployment
 ports:
   containerPort: 8080

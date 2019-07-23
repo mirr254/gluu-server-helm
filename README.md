@@ -1,4 +1,6 @@
-#
+### Note: 
+For minikube, I used 3GB of RAM and 40GB of Disk space.
+
 # Config sub-chart
 We create a service account `tiller` for the tiller server which resides in the kube-system namespace. Don't forget that service accounts are ment for intra-cluster processes running in pods.
 

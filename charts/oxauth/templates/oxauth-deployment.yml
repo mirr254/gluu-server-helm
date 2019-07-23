@@ -21,8 +21,8 @@ spec:
         resources:
           requests:
             memory: {{ .Values.requests.memory }}
-          limits:
-            memory: {{ .Values.limits.memory }}
+          # limits:
+          #   memory: {{ .Values.limits.memory }}
         ports:
         - containerPort: {{ .Values.ports.containerPort }}
         envFrom:
@@ -46,10 +46,10 @@ spec:
             port: {{ .Values.ports.containerPort }}
           initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
-      # hostAliases:
-      # - ip: NGINX_IP
-      #   hostnames:
-      #   - {{ .Values.domain }}
+      hostAliases:
+      - ip: {{ .Values.nginxIP }}
+        hostnames:
+        - {{ .Values.domain }}
       volumes:
       - name: oxauth-volume
         persistentVolumeClaim:
