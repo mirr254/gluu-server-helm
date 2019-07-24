@@ -28,9 +28,6 @@ spec:
             memory: {{ .Values.limits.memory }}
         ports:
         - containerPort: {{ .Values.containerPort }}
-        env:
-        - name: JVM_OPTS
-          value: "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1 -Xms128M"
         envFrom:
         - configMapRef:
             name: {{ template "oxtrust.fullname" . }}-cm
