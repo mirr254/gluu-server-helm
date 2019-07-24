@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: {{ template "oxauth.fullname" . }}-deployment
   labels:
-    app: {{ template "oxauth.fullname" . }}
+    app: {{ .Values.global.oxAuthServiceName }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "oxauth.fullname" . }}
+      app: {{ .Values.global.oxAuthServiceName }}
   template:
     metadata:
       labels:
-        app: {{ template "oxauth.fullname" . }}
+        app: {{ .Values.global.oxAuthServiceName }}
     spec:
       containers:
       - name: {{ template "gluu.fullname" . }}
@@ -47,9 +47,9 @@ spec:
           initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
       hostAliases:
-      - ip: {{ .Values.nginxIP }}
+      - ip: {{ .Values.global.nginxIp }}
         hostnames:
-        - {{ .Values.domain }}
+        - {{ .Values.global.domain }}
       volumes:
       - name: oxauth-volume
         persistentVolumeClaim:

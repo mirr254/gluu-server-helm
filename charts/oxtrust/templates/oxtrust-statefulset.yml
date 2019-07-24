@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "oxtrust.fullname" . }}-ss
+  labels:
+    app: {{ template "oxtrust.fullname" . }}
+    APP_NAME: {{ template "oxtrust.fullname" . }}
+spec:
+  serviceName: {{ template "oxtrust.fullname" . }}-svc
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "oxtrust.fullname" . }}
+  template:
+    metadata:
+      labels: 
+        app: {{ template "oxtrust.fullname" . }}
+        APP_NAME: {{ template "oxtrust.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "oxtrust.fullname" . }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        image: gluufederation/oxtrust:4.0.0_dev
+        resources:
+          requests:
+            memory: {{ .Values.requests.memory }}
+          # limits:
+          #   memory: {{ .Values.limits.memory }}
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        env:
+        - name: JVM_OPTS
+          value: "-XshowSettings:vm -XX:MaxRAMPercentage=80"
+        envFrom:
+        - configMapRef:
+            name: {{ template "oxtrust.fullname" . }}-cm
+        volumeMounts:
+        {{- range $key, $value := .Values.volumeMounts }}
+        # name must match the volume name below
+          - name: {{ $value.name }}
+            mountPath: {{ $value.mountPath }}
+            subPath: {{ $key }}
+        {{- end }}
+        livenessProbe:
+          httpGet:
+            path: /identity/restv1/scim-configuration
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /identity/restv1/scim-configuration
+            port: 8080
+          initialDelaySeconds: 25
+          periodSeconds: 25
+      volumes:
+        - name: shared-shib
+          persistentVolumeClaim:
+            claimName: {{ template "oxtrust.fullname" . }}-pvc
+      hostAliases:
+      - ip: {{ .Values.global.nginxIp }}
+        hostnames:
+        - {{ .Values.global.domain }}
