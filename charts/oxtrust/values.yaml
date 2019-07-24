@@ -2,13 +2,14 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
+gluuMaxRamFraction: 1
 
 dynamicStorage: true
 
 image:
   repository: nginx
   tag: stable
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: ClusterIP
@@ -24,5 +25,31 @@ limits:
 requests:
   memory: 128Mi
 
+#containerPOrt ot connect the container with
+containerPort: 8080
+
 gluuOxauthBackend: oxauth:8080
 
+#service values
+#port for which to open in oxtrust ss
+port: 8080
+clusterIp: None
+
+#VolumeMounts
+volumeMounts:
+  shared-shibboleth-idp:
+    mountPath: /opt/shared-shibboleth-idp
+    name: shared-shib
+  logs:
+    mountPath: /opt/gluu/jetty/identity/logs
+    name: shared-shib
+  ext:
+    mountPath: /opt/gluu/jetty/identity/lib/ext
+    name: shared-shib
+  static:
+    mountPath: /opt/gluu/jetty/identity/custom/static
+    name: shared-shib
+  pages:
+    mountPath: /opt/gluu/jetty/identity/custom/pages
+    name: shared-shib
+    

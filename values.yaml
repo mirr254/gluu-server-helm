@@ -50,7 +50,9 @@ oxtrust:
 global:
   namespace: default
   serviceName: opendj
+  nginxIp: 192.168.99.100
   oxAuthServiceName: oxauth
+  oxTrustSeriveName: oxtrust
   domain: kube.gluu.local
   gluuLdapUrl: opendj:1636
   gluuMaxRamFraction: 1

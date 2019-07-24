@@ -47,7 +47,7 @@ spec:
           initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
       hostAliases:
-      - ip: {{ .Values.nginxIP }}
+      - ip: {{ .Values.global.nginxIp }}
         hostnames:
         - {{ .Values.global.domain }}
       volumes:
