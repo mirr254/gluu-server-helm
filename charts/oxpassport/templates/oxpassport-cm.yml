@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ include "oxpassport.fullname" . }}
 data:
-  GLUU_CONFIG_ADAPTER: {{ .Values.global.configAdapterName }}
-  GLUU_SECRET_ADAPTER: {{ .Values.global.configSecretAdapter }}
-  DOMAIN: {{ .Values.global.domain }}
-  GLUU_LDAP_URL: {{ .Values.global.gluuOxauthBackend }}
-  GLUU_MAX_RAM_FRACTION: {{ .Values.global.gluuMaxRamFraction }}
+  GLUU_CONFIG_ADAPTER: {{ .Values.global.configAdapterName | quote }}
+  GLUU_SECRET_ADAPTER: {{ .Values.global.configSecretAdapter | quote }}
+  DOMAIN: {{ .Values.global.domain | quote }}
+  GLUU_LDAP_URL: {{ .Values.global.gluuOxauthBackend | quote }}
+  GLUU_MAX_RAM_FRACTION: {{ .Values.global.gluuMaxRamFraction | quote }}

@@ -46,14 +46,19 @@ shared-shib:
 oxtrust:
   enabled: true
   dynamicStorage: true
+
+oxpassport:
+  enabled: true
+  dynamicStorage: true
   
 global:
   namespace: default
+  gluuOxauthBackend: oxauth:8080
   serviceName: opendj
   nginxIp: 192.168.99.100
   oxAuthServiceName: oxauth
   oxTrustSeriveName: oxtrust
-  domain: kube.gluu.local
+  domain: demoexample.gluu.org
   gluuLdapUrl: opendj:1636
   gluuMaxRamFraction: 1
   configAdapterName: kubernetes
