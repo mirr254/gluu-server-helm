@@ -24,10 +24,13 @@ spec:
         resources:
           requests:
             memory: {{ .Values.requests.memory }}
-          limits:
-            memory: {{ .Values.limits.memory }}
+          # limits:
+          #   memory: {{ .Values.limits.memory }}
         ports:
         - containerPort: {{ .Values.containerPort }}
+        env:
+        - name: JVM_OPTS
+          value: "-XshowSettings:vm -XX:MaxRAMPercentage=80"
         envFrom:
         - configMapRef:
             name: {{ template "oxtrust.fullname" . }}-cm
