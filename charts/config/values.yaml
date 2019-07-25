@@ -3,13 +3,10 @@
 orgName: Gluu
 adminPass: P@ssw0rd
 email: support@gluu.com
-domain: kube.gluu.local
 countryCode: US
 state: TE
 city: SLC
 ldapType: opendj
-configAdapterName: kubernetes
-configSecretAdapter: kubernetes
 
 # VolumeClaim values
 volumeClaim:

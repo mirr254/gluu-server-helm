@@ -7,7 +7,7 @@ config:
   # email address of the administrator usually. Used for certificate creation
   email: support@gluu.com
   # adminPass is administrator password for oxTrust and LDAP
-  adminPass: password
+  adminPass: P@ssw0rd
   # domain name where the Gluu Server resides
   domain: localhost
   # organisation location details
@@ -16,8 +16,6 @@ config:
   city: SLC
   # ldapType only OpenDJ is supported
   ldapType: opendj
-  configAdapterName: kubernetes
-  configSecretAdapter: kubernetes
   
   # StorageClass values
   # values used to define the StorageClass template

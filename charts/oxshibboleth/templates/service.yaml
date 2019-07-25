@@ -1,18 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "oxpassport.fullname" . }}
+  name: {{ include "oxshibboleth.fullname" . }}
   labels:
-    app: {{ include "oxpassport.name" . }}
-    chart: {{ include "oxpassport.chart" . }}
+    app: {{ include "oxshibboleth.name" . }}
+    chart: {{ include "oxshibboleth.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  # type: {{ .Values.service.type }}
+  type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
+      targetPort: http
       protocol: TCP
       name: http
   selector:
-    app: {{ include "oxpassport.name" . }}
+    app: {{ include "oxshibboleth.name" . }}
     release: {{ .Release.Name }}

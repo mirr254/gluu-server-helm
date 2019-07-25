@@ -6,11 +6,11 @@ metadata:
 data:
   ADMIN_PW:  {{ .Values.adminPass }}
   EMAIL: {{ .Values.email }}
-  DOMAIN: {{ .Values.domain }}
+  DOMAIN: {{ .Values.global.domain }}
   ORG_NAME: {{ .Values.orgName }}
   COUNTRY_CODE: {{ .Values.countryCode }}
   STATE: {{ .Values.state }}
   CITY: {{ .Values.city }}
   LDAP_TYPE: {{ .Values.ldapType }}
-  GLUU_CONFIG_ADAPTER: {{ .Values.configAdapterName }}
-  GLUU_SECRET_ADAPTER: {{ .Values.configSecretAdapter }}
+  GLUU_CONFIG_ADAPTER: {{ .Values.global.configAdapterName }}
+  GLUU_SECRET_ADAPTER: {{ .Values.global.configSecretAdapter }}

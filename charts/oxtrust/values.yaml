@@ -8,7 +8,7 @@ dynamicStorage: true
 
 image:
   repository: nginx
-  tag: stable
+  tag: 4.0.0_dev
   pullPolicy: Always
 
 service:
