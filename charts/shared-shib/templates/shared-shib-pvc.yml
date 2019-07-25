@@ -1,9 +1,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "gluu.name" . }}-pvc
+  name: {{ .Release.Name }}-shared
 spec:
-  storageClassName: {{ template "gluu.fullname" . }}-sc
+  storageClassName: {{ include "shared-shib.fullname" . }}
   accessModes:
     - ReadWriteOnce
   resources:

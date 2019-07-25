@@ -2,9 +2,9 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: {{ template "gluu.fullname" . }}-sc
+  name: {{ include "shared-shib.fullname" . }}
   labels:
-    app: {{ template "gluu.fullname" . }}
+    app: {{ include "shared-shib.fullname" . }}
   annotations:
     storageclass.beta.kubernetes.io/is-default-class: "false"
 provisioner: {{ .Values.global.provisioner }}

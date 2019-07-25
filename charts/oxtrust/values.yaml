@@ -37,19 +37,16 @@ clusterIp: None
 
 #VolumeMounts
 volumeMounts:
-  shared-shibboleth-idp:
-    mountPath: /opt/shared-shibboleth-idp
-    name: shared-shib
   logs:
     mountPath: /opt/gluu/jetty/identity/logs
-    name: shared-shib
+    name: oxtrust
   ext:
     mountPath: /opt/gluu/jetty/identity/lib/ext
-    name: shared-shib
+    name: oxtrust
   static:
     mountPath: /opt/gluu/jetty/identity/custom/static
-    name: shared-shib
+    name: soxtrust
   pages:
     mountPath: /opt/gluu/jetty/identity/custom/pages
-    name: shared-shib
+    name: oxtrust
     
