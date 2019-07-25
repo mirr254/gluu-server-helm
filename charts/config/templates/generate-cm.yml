@@ -6,7 +6,7 @@ metadata:
 data:
   generate.json: |-
     {
-      "hostname": {{ .Values.domain | quote }},
+      "hostname": {{ .Values.global.domain | quote }},
       "country_code": {{ .Values.countryCode | quote }},
       "state": {{ .Values.state | quote }},
       "city": {{ .Values.city | quote }},
