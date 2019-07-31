@@ -1,9 +1,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "gluu.fullname" . }}-config-pvc
+  name: {{ template "gluu.fullname" . }}
 spec:
-  storageClassName: {{ template "gluu.fullname" . }}-opendj-init-sc
+  storageClassName: {{ template "gluu.fullname" . }}
   accessModes:
     - ReadWriteOnce
   resources:

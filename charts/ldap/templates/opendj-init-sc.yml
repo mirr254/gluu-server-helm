@@ -1,9 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: {{ template "gluu.fullname" . }}-config-sc
-  labels:
-    opendj: {{ template "gluu.fullname" . }}-config
+  name: {{ template "gluu.fullname" . }}
   annotations:
     storageclass.beta.kubernetes.io/is-default-class: "false"
 provisioner: {{ .Values.global.provisioner }}
@@ -28,3 +26,4 @@ allowVolumeExpansion: true
 reclaimPolicy: {{ .Values.global.reclaimPolicy }}
 mountOptions:
   - debug
+  
