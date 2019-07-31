@@ -30,3 +30,15 @@ Create chart name and version as used by the chart label.
 {{- define "gluu.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+
+{{/*
+Creates the basic labels which everything has.
+*/}}
+{{- define "gluu.labels" -}}
+app: {{ template "gluu.name" . }}
+chart: {{ template "gluu.chart" . }}
+release: {{ .Release.Name }}
+heritage: {{ .Release.Service }}
+{{- end -}}
+

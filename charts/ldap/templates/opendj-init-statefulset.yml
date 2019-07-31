@@ -1,17 +1,19 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ template "gluu.fullname" . }}-init-ss
+  name: {{ template "gluu.fullname" . }}
+  labels:
+  {{ include "gluu.labels" . | indent 2 }}
 spec:
+  serviceName: {{ template "gluu.fullname" . }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.global.serviceName }} # has to match .spec.template.metadata.labels
-  serviceName: {{ .Values.global.serviceName }}
-  replicas: {{ .Values.statefulSetReplicas }} # by default is 1
+{{ include "gluu.labels" . | indent 6 }}
   template:
     metadata:
       labels:
-        app: {{ .Values.global.serviceName }} # has to match .spec.selector.matchLabels
+{{ include "gluu.labels" . | indent 8 }}
     spec:
       # affinity:
       #   podAntiAffinity:
