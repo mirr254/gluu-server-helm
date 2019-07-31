@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "gluu.fullname" . }}-init-cm
+  name: {{ template "gluu.fullname" . }}
 data:
   GLUU_CONFIG_ADAPTER: {{ .Values.gluuConfigAdapter | quote }}
-  hostname: {{ .Values.hostname | quote }}
   GLUU_SECRET_ADAPTER: {{ .Values.gluuSecretAdapter | quote }}
   GLUU_LDAP_INIT: {{ .Values.gluuLdapInit | quote }}
-  GLUU_LDAP_INIT_HOST: {{ .Values.global.serviceName }} #{{ template "gluu.fullname" . }}-service
+  GLUU_LDAP_INIT_HOST: {{ (include "gluu.fullname" .) | quote }}
   GLUU_LDAP_INIT_PORT: {{ .Values.gluuLdapInitPort | quote }}
   GLUU_OXTRUST_CONFIG_GENERATION: {{ .Values.gluuOxtrustConfigGeneration | quote }}
   GLUU_CACHE_TYPE: {{ .Values.gluuCacheType | quote }}
@@ -17,5 +16,5 @@ data:
   GLUU_REDIS_TYPE: {{ .Values.gluuRedisType | quote }}
   {{- end }}
   # must the same as the opendj service name
-  GLUU_CERT_ALT_NAME: {{ .Values.global.serviceName }} #{{ template "gluu.fullname" . }}-service
+  GLUU_CERT_ALT_NAME: {{ template "gluu.fullname" . }}
   

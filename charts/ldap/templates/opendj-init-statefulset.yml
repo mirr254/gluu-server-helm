@@ -30,12 +30,12 @@ spec:
           persistentVolumeClaim:
             claimName: {{ template "gluu.fullname" . }}
       containers:
-      - name: {{ template "gluu.fullname" . }}-init-container
+      - name: {{ template "gluu.fullname" . }}
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         image: {{ .Values.image }}
         envFrom:
         - configMapRef:
-            name: {{ template "gluu.fullname" . }}-init-cm
+            name: {{ template "gluu.fullname" . }}
         ports:
         {{- range $key, $value := .Values.ports }}
           - containerPort: {{ $value.targetPort }}
