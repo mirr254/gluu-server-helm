@@ -1,5 +1,3 @@
-# Declare variables to be passed into your templates.
-
 # Required environment variables for generating Gluu server initial config
 # values for config-init sub-chart
 config:
@@ -29,6 +27,7 @@ config:
   gcePdStorageType: pd-standard
   azureStorageAccountType: Standard_LRS
   azureStorageKind: Shared
+  extraHosts: []
 
 oxauth:
   enabled: true
@@ -36,6 +35,11 @@ oxauth:
 
 ldap:
   enabled: true
+  type: opendj
+  extraHosts: [
+    host: opendj,
+    port: 3434
+  ] #array of k,v e.g host: host1, port: port1
 
 shared-shib:
   enabled: true
@@ -70,4 +74,3 @@ global:
   gluuSecretK8sUseKubeConfig: false
   gluuSecretAdapter: kubernetes
   provisioner: k8s.io/minikube-hostpath
-  

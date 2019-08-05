@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.global.oxAuthServiceName }}
+  name: {{ template "gluu.fullname" . }}
   labels:
-    app: {{ .Values.global.oxAuthServiceName }}
+{{ include "gluu.labels" . | indent 4 }}
 spec:
   ports:
   - port: {{ .Values.ports.containerPort }}
-    name: {{ .Values.global.oxAuthServiceName }}
+    name: {{ template "gluu.fullname" . }}
   selector:
-    app: {{ .Values.global.oxAuthServiceName }}
+{{ include "gluu.labels" . | indent 4 }}
     

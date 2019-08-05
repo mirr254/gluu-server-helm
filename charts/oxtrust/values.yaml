@@ -45,7 +45,7 @@ volumeMounts:
     name: oxtrust
   static:
     mountPath: /opt/gluu/jetty/identity/custom/static
-    name: soxtrust
+    name: oxtrust
   pages:
     mountPath: /opt/gluu/jetty/identity/custom/pages
     name: oxtrust

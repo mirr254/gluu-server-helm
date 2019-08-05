@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "oxauth.fullname" . }}-deployment
+  name: {{ template "gluu.fullname" . }}
   labels:
-    app: {{ .Values.global.oxAuthServiceName }}
+{{ include "gluu.labels" . | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.global.oxAuthServiceName }}
+{{ include "gluu.labels" . | indent 6 }}
   template:
     metadata:
       labels:
-        app: {{ .Values.global.oxAuthServiceName }}
+{{ include "gluu.labels" . | indent 8 }}
     spec:
       containers:
       - name: {{ template "gluu.fullname" . }}
@@ -27,7 +27,7 @@ spec:
         - containerPort: {{ .Values.ports.containerPort }}
         envFrom:
         - configMapRef:
-            name: {{ template "oxauth.fullname" . }}-cm
+            name: {{ template "gluu.fullname" . }}
         volumeMounts:
         {{- range $key, $value := .Values.volumeMounts }}
           - mountPath: {{ $value.mountPath }}
