@@ -3,21 +3,19 @@
 # Required environment variables for generating Gluu server initial config
 # values for config-init sub-chart
 config:
-  orgName: gluu
+  orgName: Gluu
   # email address of the administrator usually. Used for certificate creation
   email: support@gluu.com
   # adminPass is administrator password for oxTrust and LDAP
-  adminPass: password
+  adminPass: P@ssw0rd
   # domain name where the Gluu Server resides
-  domain: localhost
+  domain: demoexample.gluu.org
   # organisation location details
   countryCode: US
   state: UT
   city: SLC
   # ldapType only OpenDJ is supported
   ldapType: opendj
-  configAdapterName: kubernetes
-  configSecretAdapter: kubernetes
   
   # StorageClass values
   # values used to define the StorageClass template
@@ -46,6 +44,9 @@ shared-shib:
 oxtrust:
   enabled: true
   dynamicStorage: true
+
+oxpassport:
+  enabled: true
   
 global:
   namespace: default
@@ -53,7 +54,7 @@ global:
   nginxIp: 192.168.99.100
   oxAuthServiceName: oxauth
   oxTrustSeriveName: oxtrust
-  domain: kube.gluu.local
+  domain: demoexample.gluu.org
   gluuLdapUrl: opendj:1636
   gluuMaxRamFraction: 1
   configAdapterName: kubernetes
