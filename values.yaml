@@ -49,11 +49,15 @@ oxpassport:
   enabled: true
   
 global:
+  # enter the name of the tls secret to use
+  tlsSecret: tls-certificate
+
   namespace: default
   serviceName: opendj
   nginxIp: 192.168.99.100
   oxAuthServiceName: oxauth
   oxTrustSeriveName: oxtrust
+  # enter the domain/host you would like to use for the ingress
   domain: demoexample.gluu.org
   gluuLdapUrl: opendj:1636
   gluuMaxRamFraction: 1
