@@ -3,9 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ template "gluu.fullname" . }}-init-cm
 data:
-  GLUU_CONFIG_ADAPTER: {{ .Values.gluuConfigAdapter | quote }}
-  hostname: {{ .Values.hostname | quote }}
-  GLUU_SECRET_ADAPTER: {{ .Values.gluuSecretAdapter | quote }}
+  GLUU_CONFIG_ADAPTER: {{ .Values.global.configAdapterName | quote }}
+  GLUU_SECRET_ADAPTER: {{ .Values.global.configSecretAdapter | quote }}
   GLUU_LDAP_INIT: {{ .Values.gluuLdapInit | quote }}
   GLUU_LDAP_INIT_HOST: {{ .Values.global.serviceName }} #{{ template "gluu.fullname" . }}-service
   GLUU_LDAP_INIT_PORT: {{ .Values.gluuLdapInitPort | quote }}

@@ -1,7 +1,6 @@
 # opendj Environament Variables
 # common ConfigMap values
-gluuConfigAdapter: kubernetes
-gluuSecretAdapter: kubernetes
+
 gluuLdapInit: true
 gluuLdapInitHost: localhost
 gluuLdapInitPort: 1636
@@ -21,7 +20,7 @@ gluuOxtrustConfigGenerationRepl: false
 # values declaration
 statefulSetReplicas: 1
 imagePullPolicy: Always
-image: gluufederation/opendj:4.0.0_dev
+image: gluufederation/wrends:4.0.0_dev
 
 #container specific values declared here
 tcpSocket:

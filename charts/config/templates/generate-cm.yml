@@ -6,11 +6,12 @@ metadata:
 data:
   generate.json: |-
     {
-      "hostname": {{ .Values.domain | quote }},
-      "country_code": {{ .Values.countryCode | quote }},
-      "state": {{ .Values.state | quote }},
-      "city": {{ .Values.city | quote }},
-      "admin_pw": {{ .Values.adminPass | quote }},
-      "email": {{ .Values.email | quote }},
-      "org_name": {{ .Values.orgName | quote }}
+        "hostname": "demoexample.gluu.org",
+        "country_code": "US",
+        "state": "TX",
+        "city": "Austin",
+        "admin_pw": "S3cr3t+pass",
+        "email": "s@gluu.local",
+        "org_name": "Gluu Inc."
     }
+    
