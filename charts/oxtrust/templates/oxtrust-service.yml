@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: {{ template "gluu.fullname" . }}
   labels:
-    app: {{ template "oxtrust.fullname" . }}
+{{ include "gluu.labels" . | indent 4 }}
 spec:
   ports:
   - port: {{ .Values.port }}
     name: {{ template "oxtrust.fullname" . }}
   selector:
-    app: {{ template "oxtrust.fullname" . }}
+{{ include "gluu.labels" . | indent 4 }}
   clusterIP: {{ .Values.clusterIp }}
     
