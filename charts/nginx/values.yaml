@@ -5,16 +5,17 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  tag: stable
-  pullPolicy: IfNotPresent
+  repository: gcr.io/google_containers/defaultbackend
+  tag: 1.4
 
 nameOverride: ""
 fullnameOverride: ""
 
+namespace: default
+
 service:
-  type: ClusterIP
   port: 80
+  targetPort: 8080
 
 ingress:
   enabled: false
@@ -35,14 +36,33 @@ resources: {}
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
+  #  cpu: 10m
+  #  memory: 20Mi
   # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
+  #  cpu: 10m
+  #  memory: 20Mi
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
+
+# nginx deployment and service values
+nginx:
+  replicaCount: 1
+
+  image:
+    repository: gcr.io/google_containers/defaultbackend
+    tag: 1.4
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  namespace: default
+
+  service:
+    type: LoadBalancer
+    port: 80
+    targetPort: 8080
+    externalTrafficPolicy: Local

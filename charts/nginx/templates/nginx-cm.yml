@@ -1,0 +1,21 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "gluu.fullname" . }}-nginx-configuration
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ include "gluu.fullname" . }}-ingress-nginx
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "gluu.fullname" . }}-tcp-services
+  namespace: {{ .Values.namespace }}
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "gluu.fullname" . }}-udp-services
+  namespace: {{ .Values.namespace }}

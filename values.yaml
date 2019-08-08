@@ -47,11 +47,14 @@ oxtrust:
 
 oxpassport:
   enabled: true
-  
-global:
+
+nginx:
+  enabled: true 
+  namespace: default
   # enter the name of the tls secret to use
   tlsSecret: tls-certificate
 
+global:
   namespace: default
   serviceName: opendj
   nginxIp: 192.168.99.100

@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "gluu.fullname" . }}-default-http-backend
+  labels:
+    app: {{ include "gluu.name" . }}-default-http-backend
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+  selector:
+    app: {{ include "gluu.name" . }}-default-http-backend
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "gluu.fullname" . }}-ingress-nginx
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ include "gluu.fullname" . }}-ingress-nginx
+spec:
+  externalTrafficPolicy: {{ .Values.nginx.service.externalTrafficPolicy }}
+  type: {{ .Values.nginx.service.type }}
+  selector:
+    app: {{ include "gluu.fullname" . }}-ingress-nginx
+  ports:
+  - name: http
+    port: {{ .Values.nginx.service.port }}
+    targetPort: http
+  - name: https
+    port: 443
+    targetPort: https
