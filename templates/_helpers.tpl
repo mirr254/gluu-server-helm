@@ -40,3 +40,16 @@ chart: {{ template "gluu.chart" . }}
 release: {{ .Release.Name }}
 heritage: {{ .Release.Service }}
 {{- end -}}
+
+{{/*
+Creates a csv list of the ldap servers
+*/}}
+{{- define "gluu.ldaplist" -}}
+{{- $hosts := .Values.global.ldap.extraHosts -}}
+{{- $genLdap := dict "host" (printf "%s-%s" .Release.Name .Values.global.ldap.type) "port" .Values.global.ldap.ldapPort -}}
+{{- $hosts := prepend $hosts $genLdap -}}
+{{- $local := dict "first" true -}}
+{{- range $k, $v := $hosts -}}
+{{- if not $local.first -}},{{- end -}}{{- printf "%s:%.f" $v.host $v.port -}}{{- $_ := set $local "first" false -}}
+{{- end -}}
+{{- end -}}
