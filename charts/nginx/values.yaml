@@ -50,6 +50,7 @@ affinity: {}
 
 # nginx deployment and service values
 nginx:
+  tlsImageInitializer: kungus/gluu-tls-initializer
   replicaCount: 1
 
   image:
