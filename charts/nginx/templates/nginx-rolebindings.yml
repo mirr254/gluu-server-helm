@@ -1,0 +1,28 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: {{ include "gluu.fullname" . }}-ingress-role-nisa-binding
+  namespace: {{ .Values.namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "gluu.fullname" . }}-ingress-role
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "gluu.fullname" . }}-ingress-serviceaccount
+    namespace: {{ .Values.namespace }}
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: nginx-ingress-clusterrole-nisa-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "gluu.fullname" . }}-ingress-clusterrole
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "gluu.fullname" . }}-ingress-serviceaccount
+    namespace: {{ .Values.namespace }}

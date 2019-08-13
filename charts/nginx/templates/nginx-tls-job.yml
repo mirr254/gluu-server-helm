@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "gluu.fullname" . }}
+spec:
+  template:
+    metadata:
+      name: {{ template "gluu.name" . }}
+      labels:
+        app: {{ template "gluu.name" . }}
+    spec:
+      containers:
+      - name: {{ template "gluu.name" . }}-tls-secret
+        image: {{ .Values.nginx.tlsImageInitializer }} #this image contains kubectl installed which is what we want to run kubectl commands
+      restartPolicy: OnFailure

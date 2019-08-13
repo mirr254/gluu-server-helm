@@ -47,13 +47,20 @@ oxtrust:
 
 oxpassport:
   enabled: true
-  
+
+nginx:
+  enabled: true 
+  namespace: default
+  # enter the name of the tls secret to use
+  tlsSecret: tls-certificate
+
 global:
   namespace: default
   serviceName: opendj
   nginxIp: 192.168.99.100
   oxAuthServiceName: oxauth
   oxTrustSeriveName: oxtrust
+  # enter the domain/host you would like to use for the ingress
   domain: demoexample.gluu.org
   gluuLdapUrl: opendj:1636
   gluuMaxRamFraction: 1
@@ -67,4 +74,11 @@ global:
   gluuSecretK8sUseKubeConfig: false
   gluuSecretAdapter: kubernetes
   provisioner: k8s.io/minikube-hostpath
+
+  ldap:
+    enabled: true
+    type: opendj
+    extraHosts: []
+    ldapType: xxx
+    ldapPort: 123
   
