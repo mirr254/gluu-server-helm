@@ -68,7 +68,7 @@ spec:
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.16.2
           args:
             - /nginx-ingress-controller
-            - --default-backend-service=$(POD_NAMESPACE)/default-http-backend
+            - --default-backend-service=$(POD_NAMESPACE)/{{ include "gluu.fullname" . }}-default-http-backend
             - --configmap=$(POD_NAMESPACE)/{{ include "gluu.fullname" . }}-nginx-configuration
             - --tcp-services-configmap=$(POD_NAMESPACE)/{{ include "gluu.fullname" . }}-tcp-services
             - --udp-services-configmap=$(POD_NAMESPACE)/{{ include "gluu.fullname" . }}-udp-services
