@@ -37,16 +37,12 @@ oxauth:
 ldap:
   enabled: true
 
-shared-shib:
-  enabled: true
-  dynamicStorage: true
-
 oxtrust:
-  enabled: true
+  enabled: false
   dynamicStorage: true
 
 oxpassport:
-  enabled: true
+  enabled: false
 
 nginx:
   enabled: true 
@@ -74,11 +70,4 @@ global:
   gluuSecretK8sUseKubeConfig: false
   gluuSecretAdapter: kubernetes
   provisioner: k8s.io/minikube-hostpath
-
-  ldap:
-    enabled: true
-    type: opendj
-    extraHosts: []
-    ldapType: xxx
-    ldapPort: 123
   
