@@ -46,6 +46,9 @@ shared-shib:
 oxtrust:
   enabled: true
   dynamicStorage: true
+
+nginx:
+  enabled: true 
   
 global:
   namespace: default
