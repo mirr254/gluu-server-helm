@@ -1,22 +1,4 @@
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ template "gluu.fullname" . }}-gen-json-file
-data:
-  generate.json: |-
-    {
-      "hostname": {{ .Values.domain | quote }},
-      "country_code": {{ .Values.countryCode | quote }},
-      "state": {{ .Values.state | quote }},
-      "city": {{ .Values.city | quote }},
-      "admin_pw": {{ .Values.adminPass | quote }},
-      "email": {{ .Values.email | quote }},
-      "org_name": {{ .Values.orgName | quote }}
-    }
-
----
-
-apiVersion: v1
 data:
   tls_generator.py: "from pprint import pprint\nfrom kubernetes import config, client\nimport
     logging\n\n#use the serviceAccount k8s gives to pods\nconfig.load_incluster_config()
@@ -43,4 +25,3 @@ kind: ConfigMap
 metadata:
   creationTimestamp: "2019-08-22T08:05:59Z"
   name: {{ template "gluu.fullname" . }}-tls-script
-

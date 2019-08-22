@@ -2,7 +2,8 @@ from pprint import pprint
 from kubernetes import config, client
 import logging
 
-config.load_kube_config()
+#use the serviceAccount k8s gives to pods
+config.load_incluster_config() 
 v1 = client.CoreV1Api()
 name = "tls-certificate"
 namespace = "default"
