@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ template "shared-shib.fullname" . }}
+  name: shared-shib # will be used in shiboleth volumeMounts
   labels:
       shared-shib: shib
 spec:

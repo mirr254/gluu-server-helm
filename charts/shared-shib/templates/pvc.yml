@@ -4,7 +4,7 @@ metadata:
   name: {{ template "shared-shib.fullname" . }}
 spec:
   storageClassName: {{ .Values.persistence.storageClass }}
-  volumeName: {{ template "shared-shib.fullname" . }}
+  volumeName: shared-shib 
   accessModes:
     - {{ .Values.persistence.accessMode }}
   resources:
