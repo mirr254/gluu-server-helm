@@ -8,5 +8,8 @@ dynamicStorage: true
 requests:
   storage: 10M
 
-matchLabels:
-  sharedShib: shib
+persistence:
+  enabled: true
+  storageClass: ""
+  accessMode: ReadWriteOnce
+  size: 8Gi
