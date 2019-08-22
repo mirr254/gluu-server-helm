@@ -5,15 +5,18 @@ import logging
 #use the serviceAccount k8s gives to pods
 config.load_incluster_config() 
 v1 = client.CoreV1Api()
+
+#global vars
 name = "tls-certificate"
 namespace = "default"
-ssl_cert = ''
-ssl_key  = ''
+
 # check if gluu secret exists
 def get_certs():
     if ( v1.read_namespaced_secret( 'gluu', 'default' ) ):
         ssl_cert = v1.read_namespaced_secret( 'gluu', 'default' ).data['ssl_cert']
         ssl_key = v1.read_namespaced_secret( "gluu", "default" ).data['ssl_key']
+        
+        print('ssl_cert / {} \n ssl_key: {}'.format(ssl_cert, ssl_key) )
 
     return ssl_cert, ssl_key
 
@@ -32,8 +35,8 @@ def create_tls(cert, key):
                 'namespace': namespace
             }
             data = {
-                'tls.crt': ssl_cert,
-                'tls.key' : ssl_key,
+                'tls.crt': cert,
+                'tls.key' : key,
             }
             api_version = 'v1'
             kind = 'Secret'
@@ -50,7 +53,6 @@ def create_tls(cert, key):
         ))
 
         
-
 def main():
     cert, key = get_certs()
     create_tls(cert, key)
