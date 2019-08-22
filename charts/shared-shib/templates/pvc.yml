@@ -1,10 +1,10 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "shared-shib.fullname" . }}
+  name: {{ .Release.Name }}-shared-shib
 spec:
-  storageClassName: {{ .Values.persistence.storageClass }}
-  volumeName: shared-shib 
+  storageClassName: ""
+  volumeName: {{ template "shared-shib.fullname" . }} 
   accessModes:
     - {{ .Values.persistence.accessMode }}
   resources:
