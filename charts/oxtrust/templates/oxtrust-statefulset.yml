@@ -6,7 +6,7 @@ metadata:
     app: {{ template "oxtrust.fullname" . }}
     APP_NAME: {{ template "oxtrust.fullname" . }}
 spec:
-  serviceName: {{ template "oxtrust.fullname" . }}-svc
+  serviceName: oxtrust
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
