@@ -53,7 +53,7 @@ spec:
       volumes:
       - name: shared-shib
         persistentVolumeClaim: 
-          claimName: {{ .Release.Name }}-shared-shib
+          claimName: {{ .Release.Name }}-shared-shib-pvc
         resources:
 {{ toYaml .Values.resources | indent 10 }}
     {{- with .Values.nodeSelector }}
