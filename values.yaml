@@ -50,6 +50,9 @@ oxtrust:
 nginx:
   enabled: true 
 
+oxpassport:
+  enabled: true 
+
 global:
   namespace: default
   serviceName: opendj
