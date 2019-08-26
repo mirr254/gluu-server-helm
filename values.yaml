@@ -53,6 +53,9 @@ nginx:
 oxpassport:
   enabled: true 
 
+key-rotation"
+  enabled: true
+
 global:
   namespace: default
   serviceName: opendj

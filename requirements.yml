@@ -20,3 +20,6 @@ dependencies:
   - name: oxpassport
     condition: oxpassport.enabled
     version: 1.1.0
+  - name: key-rotation
+    condition: key-rotation.enabled
+    version: 1.1.0
