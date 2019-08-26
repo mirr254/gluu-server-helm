@@ -53,7 +53,7 @@ nginx:
 oxpassport:
   enabled: true 
 
-key-rotation"
+key-rotation:
   enabled: true
 
 global:
