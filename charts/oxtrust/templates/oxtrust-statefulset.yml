@@ -4,21 +4,22 @@ metadata:
   name: {{ template "oxtrust.fullname" . }}-ss
   labels:
     app: {{ template "oxtrust.fullname" . }}
-    APP_NAME: {{ template "oxtrust.fullname" . }}
+    APP_NAME: oxtrust
 spec:
   serviceName: oxtrust
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "oxtrust.fullname" . }}
+      APP_NAME: oxtrust
   template:
     metadata:
       labels: 
         app: {{ template "oxtrust.fullname" . }}
-        APP_NAME: {{ template "oxtrust.fullname" . }}
+        APP_NAME: oxtrust
     spec:
       containers:
-      - name: {{ template "oxtrust.fullname" . }}
+      - name: {{ include "oxtrust.name" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         image: gluufederation/oxtrust:4.0.0_dev
         resources:

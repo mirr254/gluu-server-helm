@@ -4,6 +4,7 @@ metadata:
   name: oxtrust
   labels:
     app: {{ template "oxtrust.fullname" . }}
+    APP_NAME: oxtrust
 spec:
   ports:
   - port: {{ .Values.port }}

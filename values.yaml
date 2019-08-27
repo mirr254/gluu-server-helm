@@ -51,10 +51,13 @@ nginx:
   enabled: true 
 
 oxpassport:
-  enabled: true 
+  enabled: false 
 
 key-rotation:
   enabled: true
+
+cr-rotate:
+  enabled: true 
 
 global:
   namespace: default
