@@ -59,6 +59,9 @@ key-rotation:
 cr-rotate:
   enabled: true 
 
+radius:
+  enabled: true
+
 global:
   namespace: default
   serviceName: opendj
