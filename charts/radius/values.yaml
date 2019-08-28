@@ -32,6 +32,14 @@ configMap:
   # used only if GLUU_PERSISTENCE_TYPE is ldap or hybrid
   # used only if GLUU_PERSISTENCE_TYPE is couchbase or hybrid
   gluuCouchBaseUrl: couchbase
+  
+persistence:
+  enabled: true
+  size: 10M
+  storageClassName: ""
+  accessModes: ReadWriteOnce
+  path: "/data/radius/logs"
+
 
 resources: 
   # We usually recommend not to specify default resources and to leave this as a conscious

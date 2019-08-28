@@ -20,65 +20,53 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-            - /bin/sh
-            - -c
-            - |
-                /usr/bin/python /scripts/update-clb-ip.py &
-                /app/scripts/entrypoint.sh
-          ports:
-            - name: http
-              containerPort: 8080
-              protocol: TCP
-            - name: radius-auth
-              containerPort: 1812
-            - name: radius-ac
-              containerPort: 1813
-          envFrom:
-            - configMapRef:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+          - name: radius-auth
+            containerPort: 1812
+          - name: radius-ac
+            containerPort: 1813
+        envFrom:
+          - configMapRef:
               name: {{ include "radius.fullname" . }}
-          volumeMounts:
-            - mountPath: /opt/gluu/radius/logs
-              name: radius-logs
-            - mountPath: /scripts
-              name: update-clb-ip
-          livenessProbe:
-            httpGet:
-              path: /radius
-              port: radius-auth
-            initialDelaySeconds: 30
-            periodDelaySeconds: 30 
-          readinessProbe:
-            httpGet:
-              path: /radius
-              port: radius-auth
-            initialDelaySeconds: 25
-            periodSeconds: 25
-        hostAliases:
-          - ip: {{ .Values.global.nginxIp }}
-            hostname:
-              - {{ .Values.global.domain }} 
-        volumes:
-          - name: radius-logs
-            persistentVolumeClaim:
-              claimName: {{ include "radius.fullname" }}
-          - name: update-clb-ip
-            configMap:
-              name: updateclbip
-          resources:
-{{ toYaml .Values.resources | indent 12 }}
+        volumeMounts:
+          - mountPath: /opt/gluu/radius/logs
+            name: radius-logs
+        livenessProbe:
+          httpGet:
+            path: /radius
+            port: radius-auth
+          initialDelaySeconds: 30
+          periodDelaySeconds: 30 
+        readinessProbe:
+          httpGet:
+            path: /radius
+            port: radius-auth
+          initialDelaySeconds: 25
+      hostAliases:
+        - ip: {{ .Values.global.nginxIp }}
+          hostname:
+            - {{ .Values.global.domain }} 
+      volumes:
+      - name: radius-logs
+        persistentVolumeClaim:
+          claimName: {{ include "radius.fullname" . }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 8 }}
+{{ toYaml . | indent 6 }}
     {{- end }}
     {{- with .Values.affinity }}
       affinity:
-{{ toYaml . | indent 8 }}
+{{ toYaml . | indent 6 }}
     {{- end }}
     {{- with .Values.tolerations }}
       tolerations:
-{{ toYaml . | indent 8 }}
+{{ toYaml . | indent 6 }}
     {{- end }}
