@@ -37,17 +37,17 @@ spec:
         volumeMounts:
           - mountPath: /opt/gluu/radius/logs
             name: radius-logs
-        livenessProbe:
-          httpGet:
-            path: /radius
-            port: radius-auth
-          initialDelaySeconds: 30
-          periodDelaySeconds: 30 
-        readinessProbe:
-          httpGet:
-            path: /radius
-            port: radius-auth
-          initialDelaySeconds: 25
+        # livenessProbe:
+        #   httpGet:
+        #     path: /radius
+        #     port: radius-auth
+        #   initialDelaySeconds: 40
+        #   periodDelaySeconds: 40 
+        # readinessProbe:
+        #   httpGet:
+        #     path: /radius
+        #     port: radius-auth
+        #   initialDelaySeconds: 25
       hostAliases:
         - ip: {{ .Values.global.nginxIp }}
           hostname:
