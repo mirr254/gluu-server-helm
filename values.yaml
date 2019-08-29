@@ -1,5 +1,26 @@
 # Declare variables to be passed into your templates.
 
+#global values to be used across charts
+global:
+  namespace: default
+  serviceName: opendj
+  nginxIp: 192.168.99.100
+  oxAuthServiceName: oxauth
+  oxTrustSeriveName: oxtrust
+  domain: demoexample.gluu.org
+  gluuLdapUrl: opendj:1636
+  gluuMaxRamFraction: 1
+  configAdapterName: kubernetes
+  configSecretAdapter: kubernetes
+  gluuConfigK8sNamespace: default
+  gluuConfigK8sConfigmap: gluu
+  gluuConfigK8sUseKubeConfig: false
+  gluuSecretK8sNamespace: default
+  gluuSecretK8sConfigmap: gluu
+  gluuSecretK8sUseKubeConfig: false
+  gluuSecretAdapter: kubernetes
+  provisioner: k8s.io/minikube-hostpath
+
 # Required environment variables for generating Gluu server initial config
 # values for config-init sub-chart
 config:
@@ -10,7 +31,7 @@ config:
   # adminPass is administrator password for oxTrust and LDAP
   adminPass: P@ssw0rd
   # domain name where the Gluu Server resides
-  domain: localhost
+  domain: demoexample.gluu.org
   # organisation location details
   countryCode: US
   state: UT
@@ -35,7 +56,7 @@ oxauth:
   enabled: true
   dynamicStorage: true
 
-ldap:
+opendj:
   enabled: true
 
 shared-shib:
@@ -48,35 +69,26 @@ oxtrust:
 nginx:
   enabled: true 
 
+oxshibboleth:
+  enabled: false
+
 oxpassport:
-  enabled: false 
+  enabled: false
 
 key-rotation:
-  enabled: true
+  enabled: false
 
 cr-rotate:
-  enabled: true 
+  enabled: false 
 
 radius:
-  enabled: true
+  enabled: false
 
-global:
-  namespace: default
-  serviceName: opendj
-  nginxIp: 192.168.99.100
-  oxAuthServiceName: oxauth
-  oxTrustSeriveName: oxtrust
-  domain: demoexample.gluu.org
-  gluuLdapUrl: opendj:1636
-  gluuMaxRamFraction: 1
-  configAdapterName: kubernetes
-  configSecretAdapter: kubernetes
-  gluuConfigK8sNamespace: default
-  gluuConfigK8sConfigmap: gluu
-  gluuConfigK8sUseKubeConfig: false
-  gluuSecretK8sNamespace: default
-  gluuSecretK8sConfigmap: gluu
-  gluuSecretK8sUseKubeConfig: false
-  gluuSecretAdapter: kubernetes
-  provisioner: k8s.io/minikube-hostpath
+#tags enable/disable installation of subcharts
+tags:
+  redis: false
+  oxpassport: false
+  key-rotate: false
+  cr-rotate: false
+  radius: false
   
