@@ -32,6 +32,7 @@ config:
   # ldapType only OpenDJ is supported
   ldapType: opendj
   
+  # <<<---------------------- SKIPPED THIS IN THE DOCUMENTATION -------->>>
   # StorageClass values
   # values used to define the StorageClass template
   encrypted: true
