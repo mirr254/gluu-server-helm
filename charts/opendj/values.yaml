@@ -1,7 +1,5 @@
 # opendj Environament Variables
 # common ConfigMap values
-gluuConfigAdapter: kubernetes
-gluuSecretAdapter: kubernetes
 gluuLdapInit: true
 gluuLdapInitHost: localhost
 gluuLdapInitPort: 1636
