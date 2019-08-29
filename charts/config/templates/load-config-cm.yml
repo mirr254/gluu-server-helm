@@ -12,5 +12,5 @@ data:
   STATE: {{ .Values.state }}
   CITY: {{ .Values.city }}
   LDAP_TYPE: {{ .Values.ldapType }}
-  GLUU_CONFIG_ADAPTER: {{ .Values.configAdapterName }}
-  GLUU_SECRET_ADAPTER: {{ .Values.configSecretAdapter }}
+  GLUU_CONFIG_ADAPTER: {{ .Values.global.configAdapterName }}
+  GLUU_SECRET_ADAPTER: {{ .Values.global.configSecretAdapter }}

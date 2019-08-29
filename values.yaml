@@ -3,6 +3,7 @@
 # Required environment variables for generating Gluu server initial config
 # values for config-init sub-chart
 config:
+  enabled: true
   orgName: gluu
   # email address of the administrator usually. Used for certificate creation
   email: support@gluu.com
@@ -16,8 +17,6 @@ config:
   city: SLC
   # ldapType only OpenDJ is supported
   ldapType: opendj
-  configAdapterName: kubernetes
-  configSecretAdapter: kubernetes
   
   # StorageClass values
   # values used to define the StorageClass template
@@ -41,7 +40,6 @@ ldap:
 
 shared-shib:
   enabled: true
-  dynamicStorage: true
 
 oxtrust:
   enabled: true

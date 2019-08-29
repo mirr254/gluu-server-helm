@@ -1,9 +1,43 @@
-### Note: 
-For minikube, I used 3GB of RAM and 40GB of Disk space.
+**Note**:  
+For minikube, Specs used to test the charts are. 3GB RAM and 40GB memory.
 
-# Config sub-chart
-We create a service account `tiller` for the tiller server which resides in the kube-system namespace. Don't forget that service accounts are ment for intra-cluster processes running in pods.
+## Gluu Server
 
-Next we bind the cluster-admin ClustureRole to this service account. This role is included by default in a k8s cluster and has all the admin rights of a cluster. We will use ClusterRoleBinding as it is supposed to be used accross all namespaces. Here, we want tiller to manage resources in all namespaces.
+[Gluu server](https://www.google.com) is an open-source IAM server that sync backend identities, leverage external IDPs, and achieve SSO, 2FA and more.
 
-After deploying the chart, we can run `helm init --service-account tiller --upgrade` just to make sure the tiller deployment has associated its pods with the service account `tiller`
+## TL;DR;
+
+`helm install beta/gluu`
+
+## Introduction
+
+This chart bootstraps a Gluu Server deployment on a kubernetes cluster using Helm package manager.  
+It also packages other components/services that make up Gluu Server.
+
+## Prerequisites
+
+- kubernetes 1.5+ 
+- PV provisioner support int the underlying infreastructure
+
+## installing the chart
+
+To install the chart with the release name `my-release`:
+
+`$ helm install --name my-release`
+
+The command deploys Gluu Server on kubernetes cluster in the default configuration. The [configuration](https://github.com/mirr_254/gluu-server-helm/tree/medit-charts#configuration) section lists the parameters that can be configured during installation.
+
+## Uninstalling the Chart
+
+To uninstall/delete the `my-release` deployment:
+
+`$ helm delete my-release`
+
+If during installation the release was not defined, released is checked by running `$ helm ls` the deleted using the previous command and the default release name.
+
+## Configuration
+
+|       Parameter          |      Description               |Default                             |
+|--------------------------|--------------------------------|------------------------------------|
+| 1                        | 2                              |                                    |
+| word                     | Code                           |                                    |

@@ -8,8 +8,6 @@ countryCode: US
 state: TE
 city: SLC
 ldapType: opendj
-configAdapterName: kubernetes
-configSecretAdapter: kubernetes
 
 # VolumeClaim values
 volumeClaim:
