@@ -12,13 +12,6 @@ global:
   gluuMaxRamFraction: 1
   configAdapterName: kubernetes
   configSecretAdapter: kubernetes
-  gluuConfigK8sNamespace: default
-  gluuConfigK8sConfigmap: gluu
-  gluuConfigK8sUseKubeConfig: false
-  gluuSecretK8sNamespace: default
-  gluuSecretK8sConfigmap: gluu
-  gluuSecretK8sUseKubeConfig: false
-  gluuSecretAdapter: kubernetes
   provisioner: k8s.io/minikube-hostpath
 
 # Required environment variables for generating Gluu server initial config
@@ -59,13 +52,13 @@ oxauth:
 opendj:
   enabled: true
   # options REDIS/NATIVE_PERSISTENCE
-  gluuCacheType: NATIVE_PERSISTENCE
+  gluuCacheType: REDIS # NATIVE_PERSISTENCE
   # options true/false : must be enabled if cache type is REDIS
-  gluuRedisEnabled: false
+  gluuRedisEnabled: true
 
 # redis should be enabled only when cacheType is REDIS
 redis:
-  enabled: false
+  enabled: true
 
 shared-shib:
   enabled: true
