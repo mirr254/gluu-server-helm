@@ -52,13 +52,13 @@ oxauth:
 opendj:
   enabled: true
   # options REDIS/NATIVE_PERSISTENCE
-  gluuCacheType: REDIS # NATIVE_PERSISTENCE
+  gluuCacheType: NATIVE_PERSISTENCE
   # options true/false : must be enabled if cache type is REDIS
-  gluuRedisEnabled: true
+  gluuRedisEnabled: false
 
 # redis should be enabled only when cacheType is REDIS
 redis:
-  enabled: true
+  enabled: false
 
 shared-shib:
   enabled: true
