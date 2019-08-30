@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "gluu.fullname" . }}-init-cm
+  name: {{ include "opendj.fullname" . }}
 data:
   GLUU_CONFIG_ADAPTER: {{ .Values.global.configAdapterName | quote }}
   GLUU_SECRET_ADAPTER: {{ .Values.global.configSecretAdapter | quote }}

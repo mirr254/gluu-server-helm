@@ -24,27 +24,44 @@ spec:
       #           - {{ .Values.global.serviceName }}
       #       topologyKey: "kubernetes.io/hostname"
       volumes:
-        - name: opendj-init-volume
+        - name: opendj-config
           persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-config-pvc
+            claimName: {{ include "opendj.fullname" . }}-config
+        - name: opendj-ldif
+          persistentVolumeClaim:
+            claimName: {{ include "opendj.fullname" . }}-ldif
+        - name: opendj-logs
+          persistentVolumeClaim:
+            claimName: {{ include "opendj.fullname" . }}-logs
+        - name: opendj-db
+          persistentVolumeClaim:
+            claimName: {{ include "opendj.fullname" . }}-db
+        - name: opendj-flag
+          persistentVolumeClaim:
+            claimName: {{ include "opendj.fullname" . }}-flag
       containers:
       - name: {{ template "gluu.fullname" . }}-init-container
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         image: {{ .Values.image }}
         envFrom:
         - configMapRef:
-            name: {{ template "gluu.fullname" . }}-init-cm
+            name: {{ include "opendj.fullname" . }}
         ports:
         {{- range $key, $value := .Values.ports }}
           - containerPort: {{ $value.targetPort }}
             name: {{ $key }}
         {{- end }}
         volumeMounts:
-        {{- range $key, $value := .Values.volumeInitMounts }}
-          - mountPath: {{ $value.mountPath }}
-            name: {{ $value.name }}
-            subPath: {{ $key }}
-        {{- end }}
+          - mountPath: /opt/opendj/config
+            name: opendj-config
+          - mountPath: /opt/opendj/ldif
+            name: opendj-ldif
+          - mountPath: /opt/opendj/logs
+            name: opendj-logs
+          - mountPath: /opt/opendj/db
+            name: opendj-db
+          - mountPath: /flag
+            name: opendj-flag
         readinessProbe:
           tcpSocket: 
             port: {{ .Values.tcpSocket.port }}

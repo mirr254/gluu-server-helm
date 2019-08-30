@@ -15,11 +15,20 @@ gluuRedisType: STANDALONE
 gluuLdapInitRepl: false
 gluuOxtrustConfigGenerationRepl: false
 
+nameOverride: ""
+fullnameOverride: ""
+
 # StatefulSets 
 # values declaration
 statefulSetReplicas: 1
 imagePullPolicy: Always
 image: gluufederation/opendj:4.0.0_dev
+
+persistence:
+  size: 100M
+  accessModes: ReadWriteOnce
+  type: DirectoryOrCreate
+  dbStorageSize: 5Gi
 
 #container specific values declared here
 tcpSocket:

@@ -83,7 +83,6 @@ Because by default `oxpassport` is disabled and needs to configured before it ca
 - Method 1: Setting `oxpassport.enabled` to `true` before installation, then configuring it on the UI. Kubernetes will restart the pod untill the it detects that passport has been enabled. To enable it on the UI follow these instructions.
 
 1. Login to the UI and navigate to `Configuration` -> `Organization Configuration` -> `System Configuration` and check `Scim Support` and `Passport Support` the click `Update` button on the bottom left.
-![enable passport](images/enable_pp.png)
 2. Navigate to `Configuration` -> `Manage Custom Scripts` -> `Person Authentication` -> `passport_social`. Check enabled and click `Save` at the top right of the screen.
 
 3. Navigate to `Configuration` -> `Manage Custom Scripts` -> `UMA RPT Policies` -> `scim_access_policy`. Enable it by checking the box and clicking `Save`.
