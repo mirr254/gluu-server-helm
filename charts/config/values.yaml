@@ -9,6 +9,14 @@ state: TE
 city: SLC
 ldapType: opendj
 
+nameOverride: ""
+fullNameOverride: ""
+
 # VolumeClaim values
 volumeClaim:
   storage: 1Gi
+
+persistence:
+  size: 1Gi
+  accessModes: ReadWriteOnce
+  storageClassName: ""

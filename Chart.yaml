@@ -5,5 +5,5 @@ maintainers:
 - name: gluu
 email: support@gluu.org
 description: A Helm chart for Gluu server
-name: gluu-server
+name: gluu-server-helm
 version: 1.1.0

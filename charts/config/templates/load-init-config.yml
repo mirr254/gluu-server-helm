@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "gluu.fullname" . }}
+  name: {{ include "config.fullname" . }}
 spec:
   template:
     metadata:
@@ -12,13 +12,13 @@ spec:
       volumes:
         - name: {{ template "gluu.name" . }}-config
           persistentVolumeClaim:
-            claimName: {{ template "gluu.fullname" . }}-config-pvc
-        - name: {{ template "gluu.fullname" . }}-mount-gen-file
+            claimName: {{ include "config.fullname" . }}
+        - name: {{ include "config.fullname" . }}-mount-gen-file
           configMap:
-            name: {{ template "gluu.fullname" . }}-gen-json-file
-        - name: {{ template "gluu.fullname" . }}-tls-script
+            name: {{ include "config.fullname" . }}-gen-json-file
+        - name: {{ include "config.fullname" . }}-tls-script
           configMap:
-            name: {{ template "gluu.fullname" . }}-tls-script
+            name: {{ include "config.fullname" . }}-tls-script
       containers:
       - name: {{ template "gluu.name" . }}-load
         image: gluufederation/config-init:4.0.0_dev
@@ -26,14 +26,14 @@ spec:
           - mountPath: /opt/config-init/db/
             name: {{ template "gluu.name" . }}-config
           - mountPath: /opt/config-init/db/generate.json
-            name: {{ template "gluu.fullname" . }}-mount-gen-file
+            name: {{ include "config.fullname" . }}-mount-gen-file
             subPath: generate.json
           - mountPath: /scripts/tls_generator.py
-            name: {{ template "gluu.fullname" . }}-tls-script
+            name: {{ include "config.fullname" . }}-tls-script
             subPath: tls_generator.py
         envFrom:
         - configMapRef:
-            name: {{ template "gluu.fullname" . }}-config-cm
+            name: {{ include "config.fullname" . }}-config-cm
         command: ["/bin/sh", "-c"]
         args: ["tini -g -- /app/scripts/entrypoint.sh load && /usr/bin/python /scripts/tls_generator.py"]
       restartPolicy: Never
