@@ -75,7 +75,7 @@ If during installation the release was not defined, release name is checked by r
 
 The recommended way to install the chart with custom values is to specify a `values.yaml` file with the required values. 
 
-! Tip The default [values.yaml](https://github.com/mirr254/gluu-server-helm/blob/nginx-chart/values.yaml)
+Tip! The default [values.yaml](https://github.com/mirr254/gluu-server-helm/blob/develop/values.yaml)
 
 ### Passport
 
