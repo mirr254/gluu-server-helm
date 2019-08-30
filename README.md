@@ -40,7 +40,7 @@ If during installation the release was not defined, released is checked by runni
 |       Parameter              |      Description                |Default                             |
 |------------------------------|---------------------------------|------------------------------------|
 | `global.namespace`           | namespace in which to deploy    | `default`                          |
-|                              | the server                      |                                    |
+|                                the server                                                           |
 | `global.serviceName`         | ldap service name. Used to      | `opendj`                           |
 |                              | connect other services to ldap  |                                    |
 | `global.nginxIp`             | DNS IP address to be used       | `192.168.99.100`                   |
