@@ -85,10 +85,8 @@ Because by default `oxpassport` is disabled and needs to configured before it ca
 1. Login to the UI and navigate to `Configuration` -> `Organization Configuration` -> `System Configuration` and check `Scim Support` and `Passport Support` the click `Update` button on the bottom left.
 ![enable passport](images/enable_pp.png)
 2. Navigate to `Configuration` -> `Manage Custom Scripts` -> `Person Authentication` -> `passport_social`. Check enabled and click `Save` at the top right of the screen.
-![passport_social](images/pp_social.png)
 
-3. Navigate to `Configuration` -> `Manage Custom Scripts` -> `UMA RPT Policies` -> `scim_access_policy`. Enable it by checking the box as shown in the image below.
-![scim_access_policy](images/scim_access.png)
+3. Navigate to `Configuration` -> `Manage Custom Scripts` -> `UMA RPT Policies` -> `scim_access_policy`. Enable it by checking the box and clicking `Save`.
 
 - Method 2: Installing the required services. Enabling installation of `oxpassport` and upgrading helm installation through,  
 `helm upgrade --install RELEASE-NAME .` then following the above instructions.
