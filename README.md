@@ -100,7 +100,7 @@ If during installation the release was not defined, released is checked by runni
 
 The recommended way to install the chart with custom values is to specify a `values.yaml` file with the requireed values. 
 
-!!! Tip The default [values.yaml](https://www.github.com/)
+!!! Tip The default [values.yaml](https://github.com/mirr254/gluu-server-helm/blob/nginx-chart/values.yaml)
 
 ### Passport
 
@@ -140,7 +140,7 @@ tags:
 
 Note: `redis.enabled` will always override the value in `tags.redis`
 
-### Others
+### Other optional services
 
 Other optional services like `key-rotation`, `cr-rotation` ... are enabled by by setting their coresponding values to true.  
 For example, to enable `cr-rotate` use  
