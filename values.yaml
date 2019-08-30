@@ -18,7 +18,7 @@ global:
 # values for config-init sub-chart
 config:
   enabled: true
-  orgName: gluu
+  orgName: Gluu
   # email address of the administrator usually. Used for certificate creation
   email: support@gluu.com
   # adminPass is administrator password for oxTrust and LDAP
@@ -27,7 +27,7 @@ config:
   domain: demoexample.gluu.org
   # organisation location details
   countryCode: US
-  state: UT
+  state: TE
   city: SLC
   # ldapType only OpenDJ is supported
   ldapType: opendj

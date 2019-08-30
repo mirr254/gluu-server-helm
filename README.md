@@ -95,3 +95,57 @@ If during installation the release was not defined, released is checked by runni
 | `key-rotation.enabled`       | Allow key rotation              | `false`                            |
 | `cr-rotate.enabled`          | Allow cache rotation deployment | `false`                            |
 | `radius.enabled`             | Enabled radius installation     | `false`                            |
+
+## Instruction on how to different services
+
+The recommended way to install the chart with custom values is to specify a `values.yaml` file with the requireed values. 
+
+!!! Tip The default [values.yaml](https://www.github.com/)
+
+### Passport
+
+Because by default `oxpassport` is diasbled and needs to configured before it can be used. There are 2 different ways to enabled oxpassport.
+- Method 1: Setting `oxpassport.enabled` to `true` before installation then configuring it on the UI. Kubernetes will restart the pod untill the it detects that passport has been enabled. To enable it on the UI follow these instructions.
+
+1. Login to the UI and navigate to `Configuration` -> `Organization Configuration` -> `System Configuration` and check `Scim Support` and `Passport Support` the click `Update` button on the bottom left.
+![enable passport](images/enable_pp.png)
+2. Navigate to `Configuration` -> `Manage Custom Scripts` -> `Person Authentication` -> `passport_social`. Check enabled and click `Save` at the top right of the screen.
+![passport_social](images/pp_social.png)
+
+3. Navigate to `Configuration` -> `Manage Custom Scripts` -> `UMA RPT Policies` -> `scim_access_policy`. Enable it by checking the box as shown in the image below.
+![scim_access_policy](images/scim_access.png)
+
+- Method 2: Installing the required services. Enabling installation of `oxpassport` and upgrading helm installation through,  
+`helm upgrade --install RELEASE-NAME .` then following the above instructions.
+
+### Redis
+
+To enable usage of Redis change the following values.
+
+```
+opendj:
+  enabled: true
+  # options REDIS/NATIVE_PERSISTENCE
+  gluuCacheType: REDIS
+  # options true/false : must be enabled if cache type is REDIS
+  gluuRedisEnabled: true
+
+# redis should be enabled only when cacheType is REDIS
+redis:
+  enabled: true
+
+tags:
+  redis: true
+```
+
+Note: `redis.enabled` will always override the value in `tags.redis`
+
+### Others
+
+Other optional services like `key-rotation`, `cr-rotation` ... are enabled by by setting their coresponding values to true.  
+For example, to enable `cr-rotate` use  
+```
+cr-rotate:
+  enabled: true
+
+```
